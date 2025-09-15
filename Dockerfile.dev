@@ -1,0 +1,26 @@
+FROM node:20-slim
+
+WORKDIR /app
+
+# Instalar dependencias para compilación en Raspberry Pi
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar archivos de dependencias
+COPY package*.json ./
+
+# Configuración específica para Raspberry Pi
+RUN npm config set target_arch arm64 && \
+    npm config set target_platform linux && \
+    npm install --no-optional
+
+# Copiar código fuente
+COPY . .
+
+EXPOSE 5173
+
+# Comando para desarrollo con host binding para acceso externo
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
