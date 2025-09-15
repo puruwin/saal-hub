@@ -12,10 +12,8 @@ RUN apt-get update && apt-get install -y \
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Configuración específica para Raspberry Pi
-RUN npm config set target_arch arm64 && \
-    npm config set target_platform linux && \
-    npm install --no-optional
+# Instalación optimizada
+RUN npm install --no-optional
 
 # Copiar código fuente
 COPY . .
