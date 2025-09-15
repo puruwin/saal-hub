@@ -143,8 +143,8 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
                             <div className="space-y-2">
                               {meal.items.map((item) => (
                                 <div key={item.id} className="flex items-center justify-between group">
-                                  {editingItem?.menuId === menu.id && 
-                                   editingItem?.mealId === meal.id && 
+                                  {editingItem?.menuId === menu?.id && 
+                                   editingItem?.mealId === meal?.id && 
                                    editingItem?.itemId === item.id ? (
                                     <input
                                       type="text"
@@ -158,7 +158,7 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
                                   ) : (
                                     <span 
                                       className="text-sm cursor-pointer hover:bg-white hover:shadow-sm px-2 py-1 rounded transition-all"
-                                      onClick={() => handleItemEdit(menu.id, meal.id, item.id, item.name)}
+                                      onClick={() => handleItemEdit(menu?.id || 0, meal?.id || 0, item.id, item.name)}
                                     >
                                       {item.name}
                                     </span>
