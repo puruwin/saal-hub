@@ -1,9 +1,10 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import MenuKiosk from "./pages/MenuKiosk";
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
