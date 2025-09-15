@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Hub - Kiosko</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        #kiosk-frame {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        Cargando Menu Hub...
+    </div>
+    
+    <iframe 
+        id="kiosk-frame" 
+        src="/kiosk" 
+        style="display: none;"
+        onload="hideLoading()">
+    </iframe>
+    
+    <script>
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('kiosk-frame').style.display = 'block';
+        }
+        
+        // Auto-refresh cada 5 minutos
+        setInterval(() => {
+            document.getElementById('kiosk-frame').src = document.getElementById('kiosk-frame').src;
+        }, 300000);
+        
+        // Prevenir clic derecho y otras interacciones
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
