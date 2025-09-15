@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y \
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalación optimizada
-RUN npm install --no-optional
+# Instalación optimizada para ARM64
+RUN npm install --no-optional && \
+    npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiar código fuente
 COPY . .
