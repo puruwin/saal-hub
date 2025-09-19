@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WeeklyMenuView from "../components/WeeklyMenuView";
 import DayEditor from "../components/DayEditor";
+import { menuService } from "../services/menuService";
 
 interface User {
   id: string;
@@ -31,6 +32,8 @@ export default function Dashboard() {
   const [menus, setMenus] = useState<Menu[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [viewMode, setViewMode] = useState<'weekly' | 'daily'>('weekly');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,27 +76,74 @@ export default function Dashboard() {
     navigate("/");
   };
 
-  // Funciones para manejar menús
-  const handleMenuUpdate = (updatedMenu: Menu) => {
-    setMenus(prev => {
-      const existingIndex = prev.findIndex(m => m.id === updatedMenu.id);
-      if (existingIndex >= 0) {
-        const newMenus = [...prev];
-        newMenus[existingIndex] = updatedMenu;
-        return newMenus;
-      } else {
-        return [...prev, updatedMenu];
-      }
-    });
+  // Cargar menús del backend
+  const loadMenus = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    setError(null);
+    try {
+      // Cargar menús de la semana actual
+      const startOfWeek = new Date();
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1); // Lunes
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6); // Domingo
+
+      const startDateStr = startOfWeek.toISOString().split('T')[0];
+      const endDateStr = endOfWeek.toISOString().split('T')[0];
+      
+      const fetchedMenus = await menuService.getMenus(startDateStr, endDateStr);
+      setMenus(fetchedMenus);
+    } catch (err) {
+      console.error('Error cargando menús:', err);
+      setError('Error al cargar los menús. Inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleMenuCreate = (date: string) => {
-    const newMenu: Menu = {
-      id: Date.now(),
-      date,
-      meals: []
-    };
-    setMenus(prev => [...prev, newMenu]);
+  // Funciones para manejar menús
+  const handleMenuUpdate = async (updatedMenu: Menu) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await menuService.updateMenu(updatedMenu.id, {
+        meals: updatedMenu.meals
+      });
+      
+      setMenus(prev => {
+        const existingIndex = prev.findIndex(m => m.id === result.id);
+        if (existingIndex >= 0) {
+          const newMenus = [...prev];
+          newMenus[existingIndex] = result;
+          return newMenus;
+        } else {
+          return [...prev, result];
+        }
+      });
+    } catch (err) {
+      console.error('Error actualizando menú:', err);
+      setError('Error al actualizar el menú. Inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMenuCreate = async (date: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const newMenu = await menuService.createMenu({
+        date,
+        meals: []
+      });
+      setMenus(prev => [...prev, newMenu]);
+    } catch (err) {
+      console.error('Error creando menú:', err);
+      setError('Error al crear el menú. Inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getMenuForDate = (date: Date) => {
@@ -101,44 +151,10 @@ export default function Dashboard() {
     return menus.find(menu => menu.date === dateStr);
   };
 
-  // Datos de ejemplo para demostración
+  // Cargar menús cuando el usuario se autentique
   useEffect(() => {
     if (user) {
-      // Cargar menús de ejemplo
-      const exampleMenus: Menu[] = [
-        {
-          id: 1,
-          date: new Date().toISOString().split('T')[0],
-          meals: [
-            {
-              id: 1,
-              type: 'breakfast',
-              items: [
-                { id: 1, name: 'Café con leche', allergens: ['Lácteos'] },
-                { id: 2, name: 'Tostadas con mantequilla', allergens: ['Gluten', 'Lácteos'] }
-              ]
-            },
-            {
-              id: 2,
-              type: 'lunch',
-              items: [
-                { id: 3, name: 'Ensalada mixta', allergens: [] },
-                { id: 4, name: 'Pollo a la plancha', allergens: [] },
-                { id: 5, name: 'Arroz blanco', allergens: [] }
-              ]
-            },
-            {
-              id: 3,
-              type: 'dinner',
-              items: [
-                { id: 6, name: 'Sopa de verduras', allergens: [] },
-                { id: 7, name: 'Pescado al horno', allergens: ['Pescado'] }
-              ]
-            }
-          ]
-        }
-      ];
-      setMenus(exampleMenus);
+      loadMenus();
     }
   }, [user]);
 
@@ -244,6 +260,36 @@ export default function Dashboard() {
               </div>
             )}
           </div>
+
+          {/* Manejo de errores */}
+          {error && (
+            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  ⚠️
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm">{error}</p>
+                  <button
+                    onClick={() => setError(null)}
+                    className="mt-2 text-xs underline hover:no-underline"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Indicador de carga */}
+          {loading && (
+            <div className="mb-6 bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg">
+              <div className="flex items-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-700 mr-3"></div>
+                <p className="text-sm">Cargando...</p>
+              </div>
+            </div>
+          )}
 
           {/* Contenido principal */}
           {viewMode === 'weekly' ? (

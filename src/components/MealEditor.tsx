@@ -21,7 +21,7 @@ interface MealEditorProps {
 
 const mealTypeLabels = {
   breakfast: 'Desayuno',
-  lunch: 'Almuerzo',
+  lunch: 'Comida',
   dinner: 'Cena'
 };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AllergenIcon from "./AllergenIcon";
+import { menuService } from "../services/menuService";
 
 interface MealItem {
   id: number;
@@ -26,7 +27,7 @@ interface WeeklyMenuViewProps {
 
 const mealTypeLabels = {
   breakfast: 'Desayuno',
-  lunch: 'Almuerzo',
+  lunch: 'Comida',
   dinner: 'Cena'
 };
 
@@ -39,6 +40,7 @@ const mealTypeColors = {
 export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewProps) {
   const [editingItem, setEditingItem] = useState<{menuId: number, mealId: number, itemId: number} | null>(null);
   const [editingText, setEditingText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const startOfWeek = new Date();
   startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1); // Lunes
@@ -59,31 +61,49 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
     setEditingText(currentName);
   };
 
-  const handleItemSave = () => {
-    if (!editingItem || !editingText.trim()) return;
+  const handleItemSave = async () => {
+    if (!editingItem || !editingText.trim() || loading) return;
 
     const menu = menus.find(m => m.id === editingItem.menuId);
     if (!menu) return;
 
-    const updatedMenu = {
-      ...menu,
-      meals: menu.meals.map(meal => 
-        meal.id === editingItem.mealId 
-          ? {
-              ...meal,
-              items: meal.items.map(item =>
-                item.id === editingItem.itemId
-                  ? { ...item, name: editingText.trim() }
-                  : item
-              )
-            }
-          : meal
-      )
-    };
+    const meal = menu.meals.find(m => m.id === editingItem.mealId);
+    if (!meal) return;
 
-    onMenuUpdate(updatedMenu);
-    setEditingItem(null);
-    setEditingText('');
+    const item = meal.items.find(i => i.id === editingItem.itemId);
+    if (!item) return;
+
+    setLoading(true);
+    try {
+      await menuService.updateMealItem(menu.id, meal.id, item.id, {
+        name: editingText.trim(),
+        allergens: item.allergens
+      });
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(meal => 
+          meal.id === editingItem.mealId 
+            ? {
+                ...meal,
+                items: meal.items.map(item =>
+                  item.id === editingItem.itemId
+                    ? { ...item, name: editingText.trim() }
+                    : item
+                )
+              }
+            : meal
+        )
+      };
+
+      onMenuUpdate(updatedMenu);
+      setEditingItem(null);
+      setEditingText('');
+    } catch (error) {
+      console.error('Error guardando cambios:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleItemCancel = () => {
@@ -99,6 +119,11 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
     }
   };
 
+  const handleViewDayMenu = (date: Date) => {
+    const dateStr = date.toISOString().split('T')[0];
+    window.open(`/menu/${dateStr}`, '_blank');
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm border">
       <div className="p-6 border-b">
@@ -112,8 +137,9 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
             <tr className="border-b bg-gray-50">
               <th className="text-left p-4 font-medium text-gray-700">Día</th>
               <th className="text-left p-4 font-medium text-gray-700">Desayuno</th>
-              <th className="text-left p-4 font-medium text-gray-700">Almuerzo</th>
+              <th className="text-left p-4 font-medium text-gray-700">Comida</th>
               <th className="text-left p-4 font-medium text-gray-700">Cena</th>
+              <th className="text-left p-4 font-medium text-gray-700">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -157,8 +183,8 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
                                     />
                                   ) : (
                                     <span 
-                                      className="text-sm cursor-pointer hover:bg-white hover:shadow-sm px-2 py-1 rounded transition-all"
-                                      onClick={() => handleItemEdit(menu?.id || 0, meal?.id || 0, item.id, item.name)}
+                                      className={`text-sm cursor-pointer hover:bg-white hover:shadow-sm px-2 py-1 rounded transition-all ${loading ? 'opacity-50' : ''}`}
+                                      onClick={() => !loading && handleItemEdit(menu?.id || 0, meal?.id || 0, item.id, item.name)}
                                     >
                                       {item.name}
                                     </span>
@@ -189,6 +215,16 @@ export default function WeeklyMenuView({ menus, onMenuUpdate }: WeeklyMenuViewPr
                       </td>
                     );
                   })}
+
+                  {/* Nueva columna de acciones */}
+                  <td className="p-4">
+                    <button
+                      onClick={() => handleViewDayMenu(day)}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full"
+                    >
+                      Ver Menú
+                    </button>
+                  </td>
                 </tr>
               );
             })}

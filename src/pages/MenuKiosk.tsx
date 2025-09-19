@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AllergenIcon from "../components/AllergenIcon";
+import { menuService } from "../services/menuService";
 
 interface MealItem {
   id: number;
@@ -21,73 +22,48 @@ interface Menu {
 
 const mealTypeLabels = {
   breakfast: 'Desayuno',
-  lunch: 'Almuerzo',
+  lunch: 'Comida',
   dinner: 'Cena'
 };
 
 export default function MenuKiosk() {
-  const [menus, setMenus] = useState<Menu[]>([]);
+  const [todayMenu, setTodayMenu] = useState<Menu | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Simular carga de datos (en producción vendría de la API)
-  useEffect(() => {
-    const loadMenus = async () => {
-      setIsLoading(true);
-      // Simular delay de API
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Datos de ejemplo
-      const exampleMenus: Menu[] = [
-        {
-          id: 1,
-          date: new Date().toISOString().split('T')[0],
-          meals: [
-            {
-              id: 1,
-              type: 'breakfast',
-              items: [
-                { id: 1, name: 'Café con leche', allergens: ['Lácteos'] },
-                { id: 2, name: 'Tostadas con mantequilla', allergens: ['Gluten', 'Lácteos'] },
-                { id: 3, name: 'Zumo de naranja natural', allergens: [] },
-                { id: 4, name: 'Cereales con leche', allergens: ['Lácteos', 'Gluten'] }
-              ]
-            },
-            {
-              id: 2,
-              type: 'lunch',
-              items: [
-                { id: 5, name: 'Ensalada mixta con tomate y lechuga', allergens: [] },
-                { id: 6, name: 'Pollo a la plancha con especias', allergens: [] },
-                { id: 7, name: 'Arroz blanco con verduras', allergens: [] },
-                { id: 8, name: 'Pan integral', allergens: ['Gluten'] },
-                { id: 9, name: 'Fruta de temporada', allergens: [] }
-              ]
-            },
-            {
-              id: 3,
-              type: 'dinner',
-              items: [
-                { id: 10, name: 'Sopa de verduras casera', allergens: [] },
-                { id: 11, name: 'Pescado al horno con limón', allergens: ['Pescado'] },
-                { id: 12, name: 'Puré de patatas', allergens: ['Lácteos'] },
-                { id: 13, name: 'Yogur natural', allergens: ['Lácteos'] }
-              ]
-            }
-          ]
-        }
-      ];
-      
-      setMenus(exampleMenus);
-      setIsLoading(false);
-    };
-
-    loadMenus();
-  }, []);
-
-  const getTodayMenu = () => {
-    const today = new Date().toISOString().split('T')[0];
-    return menus.find(menu => menu.date === today);
+  // Función para obtener la fecha de hoy en formato YYYY-MM-DD
+  const getTodayDate = () => {
+    return new Date().toISOString().split('T')[0];
   };
+
+  // Cargar menú del día desde el backend
+  const loadTodayMenu = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const today = getTodayDate();
+      const menu = await menuService.getMenuByDate(today);
+      
+      setTodayMenu(menu);
+    } catch (err: any) {
+      console.error('Error cargando menú del día:', err);
+      setError('Error al cargar el menú del día. Intente nuevamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Cargar menú al montar el componente
+  useEffect(() => {
+    loadTodayMenu();
+    
+    // Auto-refresh cada 5 minutos (300000 ms)
+    const interval = setInterval(loadTodayMenu, 300000);
+    
+    // Limpiar interval al desmontar
+    return () => clearInterval(interval);
+  }, []);
 
   if (isLoading) {
     return (
@@ -95,14 +71,33 @@ export default function MenuKiosk() {
         <div className="text-center">
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/50">
             <div className="animate-spin rounded-full h-20 w-20 border-4 border-blue-200 border-t-blue-600 mx-auto mb-6"></div>
-            <p className="text-gray-700 text-2xl font-medium">Cargando menú...</p>
+            <p className="text-gray-700 text-2xl font-medium">Cargando menú del día...</p>
           </div>
         </div>
       </div>
     );
   }
 
-  const todayMenu = getTodayMenu();
+  // Mostrar error si hay problemas de conexión
+  if (error) {
+    return (
+      <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="bg-red-50/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-red-200">
+            <div className="text-6xl mb-6">⚠️</div>
+            <h2 className="text-3xl font-bold text-red-800 mb-4">Error de conexión</h2>
+            <p className="text-red-600 text-xl mb-6">{error}</p>
+            <button
+              onClick={loadTodayMenu}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              Reintentar
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">

@@ -2,7 +2,14 @@
 import axios from "axios";
 import type { AuthResponse } from "../types/Auth";
 
-const API_URL = "http://192.168.1.90:3000";
+// Debug: verificar variables de entorno
+console.log('🔍 Debug VITE_API_URL:', import.meta.env.VITE_API_URL);
+console.log('🔍 Debug MODE:', import.meta.env.MODE);
+console.log('🔍 Debug DEV:', import.meta.env.DEV);
+console.log('🔍 Debug todas las env:', import.meta.env);
+
+const API_URL = `http://${import.meta.env.VITE_API_URL || 'localhost'}:3000`;
+console.log('🎯 API_URL final:', API_URL);
 
 // Configuración base de axios
 const apiClient = axios.create({

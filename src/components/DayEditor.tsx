@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AllergenIcon from "./AllergenIcon";
+import { menuService } from "../services/menuService";
 
 interface MealItem {
   id: number;
@@ -28,7 +29,7 @@ interface DayEditorProps {
 
 const mealTypeLabels = {
   breakfast: 'Desayuno',
-  lunch: 'Almuerzo',
+  lunch: 'Comida',
   dinner: 'Cena'
 };
 
@@ -48,6 +49,7 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
   const [newItemName, setNewItemName] = useState('');
   const [newItemAllergens, setNewItemAllergens] = useState<string[]>([]);
   const [showAddItem, setShowAddItem] = useState<'breakfast' | 'lunch' | 'dinner' | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const dateStr = date.toISOString().split('T')[0];
   const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
@@ -58,96 +60,127 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
     return menu?.meals.find(meal => meal.type === type);
   };
 
-  const handleAddItem = (mealType: 'breakfast' | 'lunch' | 'dinner') => {
-    if (!newItemName.trim()) return;
+  const handleAddItem = async (mealType: 'breakfast' | 'lunch' | 'dinner') => {
+    if (!newItemName.trim() || loading) return;
 
-    const meal = getMealByType(mealType);
-    const newItem: MealItem = {
-      id: Date.now(), // ID temporal
-      name: newItemName.trim(),
-      allergens: newItemAllergens
-    };
-
-    if (meal) {
-      // Actualizar comida existente
-      const updatedMenu = {
-        ...menu!,
-        meals: menu!.meals.map(m => 
-          m.id === meal.id 
-            ? { ...m, items: [...m.items, newItem] }
-            : m
-        )
-      };
-      onMenuUpdate(updatedMenu);
-    } else {
-      // Crear nueva comida
-      const newMeal: Meal = {
-        id: Date.now(),
-        type: mealType,
-        items: [newItem]
+    setLoading(true);
+    try {
+      const meal = getMealByType(mealType);
+      const newItemData = {
+        name: newItemName.trim(),
+        allergens: newItemAllergens
       };
 
-      if (menu) {
+      if (meal && menu) {
+        // Agregar item a comida existente usando la API
+        const newItem = await menuService.addMealItem(menu.id, meal.id, newItemData);
+        
+        const updatedMenu = {
+          ...menu,
+          meals: menu.meals.map(m => 
+            m.id === meal.id 
+              ? { ...m, items: [...m.items, newItem] }
+              : m
+          )
+        };
+        onMenuUpdate(updatedMenu);
+      } else if (menu) {
+        // Crear nueva comida en menú existente
+        const newMeal = await menuService.addMeal(menu.id, {
+          type: mealType,
+          items: [newItemData]
+        });
+
         const updatedMenu = {
           ...menu,
           meals: [...menu.meals, newMeal]
         };
         onMenuUpdate(updatedMenu);
       } else {
-        // Crear menú completo
-        const newMenu: Menu = {
-          id: Date.now(),
+        // Crear menú completo nuevo
+        const newMenu = await menuService.createMenu({
           date: dateStr,
-          meals: [newMeal]
-        };
+          meals: [{
+            type: mealType,
+            items: [newItemData]
+          }]
+        });
         onMenuUpdate(newMenu);
       }
+
+      setNewItemName('');
+      setNewItemAllergens([]);
+      setShowAddItem(null);
+    } catch (error) {
+      console.error('Error agregando plato:', error);
+    } finally {
+      setLoading(false);
     }
-
-    setNewItemName('');
-    setNewItemAllergens([]);
-    setShowAddItem(null);
   };
 
-  const handleRemoveItem = (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number) => {
-    if (!menu) return;
+  const handleRemoveItem = async (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number) => {
+    if (!menu || loading) return;
 
     const meal = getMealByType(mealType);
     if (!meal) return;
 
-    const updatedMenu = {
-      ...menu,
-      meals: menu.meals.map(m => 
-        m.id === meal.id 
-          ? { ...m, items: m.items.filter(item => item.id !== itemId) }
-          : m
-      )
-    };
-    onMenuUpdate(updatedMenu);
+    setLoading(true);
+    try {
+      await menuService.deleteMealItem(menu.id, meal.id, itemId);
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === meal.id 
+            ? { ...m, items: m.items.filter(item => item.id !== itemId) }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+    } catch (error) {
+      console.error('Error eliminando plato:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleEditItem = (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number, newName: string) => {
-    if (!menu || !newName.trim()) return;
+  const handleEditItem = async (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number, newName: string) => {
+    if (!menu || !newName.trim() || loading) return;
 
     const meal = getMealByType(mealType);
     if (!meal) return;
 
-    const updatedMenu = {
-      ...menu,
-      meals: menu.meals.map(m => 
-        m.id === meal.id 
-          ? {
-              ...m, 
-              items: m.items.map(item => 
-                item.id === itemId 
-                  ? { ...item, name: newName.trim() }
-                  : item
-              )
-            }
-          : m
-      )
-    };
-    onMenuUpdate(updatedMenu);
+    const item = meal.items.find(i => i.id === itemId);
+    if (!item) return;
+
+    setLoading(true);
+    try {
+      await menuService.updateMealItem(menu.id, meal.id, itemId, {
+        name: newName.trim(),
+        allergens: item.allergens
+      });
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === meal.id 
+            ? {
+                ...m, 
+                items: m.items.map(item => 
+                  item.id === itemId 
+                    ? { ...item, name: newName.trim() }
+                    : item
+                )
+              }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+    } catch (error) {
+      console.error('Error editando plato:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const toggleAllergen = (allergen: string) => {
@@ -156,6 +189,10 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
         ? prev.filter(a => a !== allergen)
         : [...prev, allergen]
     );
+  };
+
+  const handleViewDayMenu = () => {
+    window.open(`/menu/${dateStr}`, '_blank');
   };
 
   if (!menu) {
@@ -180,9 +217,17 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
   return (
     <div className="bg-white rounded-lg shadow-sm border">
       <div className="p-6 border-b">
-        <h3 className="text-xl font-semibold text-gray-900">
-          {dayName.charAt(0).toUpperCase() + dayName.slice(1)} {dayNumber} de {monthName}
-        </h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-semibold text-gray-900">
+            {dayName.charAt(0).toUpperCase() + dayName.slice(1)} {dayNumber} de {monthName}
+          </h3>
+          <button
+            onClick={handleViewDayMenu}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          >
+            Ver Menú del Día
+          </button>
+        </div>
       </div>
 
       <div className="p-6 space-y-6">
@@ -240,10 +285,10 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
                     <div className="flex space-x-2">
                       <button
                         onClick={() => handleAddItem(mealType)}
-                        disabled={!newItemName.trim()}
+                        disabled={!newItemName.trim() || loading}
                         className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
                       >
-                        Agregar
+                        {loading ? 'Agregando...' : 'Agregar'}
                       </button>
                       <button
                         onClick={() => {
@@ -283,7 +328,8 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
                       </div>
                       <button
                         onClick={() => handleRemoveItem(mealType, item.id)}
-                        className="text-red-600 hover:text-red-700 ml-2"
+                        disabled={loading}
+                        className="text-red-600 hover:text-red-700 ml-2 disabled:opacity-50"
                       >
                         ✕
                       </button>
