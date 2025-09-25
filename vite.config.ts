@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
   define: {
     // Fallback si los archivos .env no funcionan
     'import.meta.env.VITE_API_URL': JSON.stringify(
-      mode === 'development' ? 'localhost' : '192.168.1.90'
+      mode === 'development' ? 'localhost' : '192.168.1.130'
     ),
   },
 }))
