@@ -24,12 +24,15 @@ RUN npm ci && \
 # Copiamos código fuente
 COPY . .
 
+# Usar config simplificado sin plugins problemáticos
+RUN mv vite.config.production.ts vite.config.ts
+
 # Configurar variables de entorno para el build
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
 
-# Build de producción
-RUN npm run build
+# Build de producción con vite directamente
+RUN ./node_modules/.bin/vite build
 
 # Etapa 2: Servir archivos estáticos con imagen compatible con ARM
 FROM nginx:stable-alpine
