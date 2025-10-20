@@ -17,9 +17,9 @@ RUN apt-get update && apt-get install -y \
 # Copiamos archivos de dependencias
 COPY package*.json ./
 
-# Instalación limpia de todas las dependencias
+# Instalación limpia de todas las dependencias (incluyendo dev)
 RUN rm -rf node_modules package-lock.json && \
-    npm install --legacy-peer-deps && \
+    npm install --legacy-peer-deps --include=dev && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev --legacy-peer-deps
 
 # Copiamos código fuente
