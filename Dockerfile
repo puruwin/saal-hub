@@ -14,13 +14,12 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiamos archivos de dependencias
+# Copiamos archivos de dependencias Y package-lock
 COPY package*.json ./
 
-# Instalación limpia de todas las dependencias (incluyendo dev)
-RUN rm -rf node_modules package-lock.json && \
-    npm install --legacy-peer-deps --include=dev && \
-    npm install @rollup/rollup-linux-arm64-gnu --save-dev --legacy-peer-deps
+# Instalación usando package-lock.json existente
+RUN npm ci && \
+    npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
 COPY . .
