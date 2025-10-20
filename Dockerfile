@@ -29,8 +29,8 @@ COPY . .
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
 
-# Verificar que TypeScript esté instalado
-RUN npx tsc --version || (echo "TypeScript no encontrado, instalando..." && npm install typescript --save-dev)
+# Asegurar que TypeScript esté instalado globalmente
+RUN npm install -g typescript
 
 # Build de producción
 RUN npm run build

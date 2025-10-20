@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "npx tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "validate": "npm run type-check && npm run lint",
     "preview": "vite preview"
   },
