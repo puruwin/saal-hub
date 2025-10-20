@@ -17,11 +17,10 @@ RUN apt-get update && apt-get install -y \
 # Copiamos archivos de dependencias
 COPY package*.json ./
 
-# Instalación optimizada para Raspberry Pi
-# Instalar todas las dependencias incluyendo devDependencies para el build
-RUN npm install && \
-    npm install @rollup/rollup-linux-arm64-gnu --save-dev && \
-    npm install @vitejs/plugin-react vite-plugin-svgr --save-dev
+# Instalación limpia de todas las dependencias
+RUN rm -rf node_modules package-lock.json && \
+    npm install --legacy-peer-deps && \
+    npm install @rollup/rollup-linux-arm64-gnu --save-dev --legacy-peer-deps
 
 # Copiamos código fuente
 COPY . .
@@ -30,13 +29,7 @@ COPY . .
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
 
-# Verificar que las dependencias críticas estén instaladas
-RUN echo "Verificando dependencias instaladas:" && \
-    npm list @vitejs/plugin-react vite-plugin-svgr @rollup/rollup-linux-arm64-gnu || true && \
-    ls -la node_modules/@vitejs/ && \
-    ls -la node_modules/vite-plugin-svgr/
-
-# Build de producción (solo Vite, sin TypeScript check)
+# Build de producción
 RUN npm run build
 
 # Etapa 2: Servir archivos estáticos con imagen compatible con ARM
