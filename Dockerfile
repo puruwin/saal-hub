@@ -29,13 +29,7 @@ COPY . .
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
 
-# Asegurar que TypeScript esté instalado globalmente
-RUN npm install -g typescript
-
-# Verificar que las dependencias estén instaladas correctamente
-RUN npm list @types/react @types/react-dom || npm install --save-dev @types/react @types/react-dom
-
-# Build de producción
+# Build de producción (solo Vite, sin TypeScript check)
 RUN npm run build
 
 # Etapa 2: Servir archivos estáticos con imagen compatible con ARM
