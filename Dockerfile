@@ -19,7 +19,7 @@ COPY package*.json ./
 
 # Instalación optimizada para Raspberry Pi
 # Instalar todas las dependencias incluyendo devDependencies para el build
-RUN npm install --include=dev && \
+RUN npm ci --include=dev && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
@@ -28,6 +28,10 @@ COPY . .
 # Configurar variables de entorno para el build
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
+
+# Verificar que las dependencias críticas estén instaladas
+RUN ls -la node_modules/@vitejs/ && \
+    ls -la node_modules/vite-plugin-svgr/ || echo "Algunas dependencias faltan"
 
 # Build de producción (solo Vite, sin TypeScript check)
 RUN npm run build
