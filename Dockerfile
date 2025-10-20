@@ -32,6 +32,9 @@ ENV VITE_API_URL=$VITE_API_URL
 # Asegurar que TypeScript esté instalado globalmente
 RUN npm install -g typescript
 
+# Verificar que las dependencias estén instaladas correctamente
+RUN npm list @types/react @types/react-dom || npm install --save-dev @types/react @types/react-dom
+
 # Build de producción
 RUN npm run build
 
