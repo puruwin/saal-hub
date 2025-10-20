@@ -19,7 +19,7 @@ COPY package*.json ./
 
 # Instalación optimizada para Raspberry Pi
 # Instalar todas las dependencias incluyendo devDependencies para el build
-RUN npm install && \
+RUN npm install --include=dev && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
@@ -28,6 +28,9 @@ COPY . .
 # Configurar variables de entorno para el build
 ENV NODE_ENV=$NODE_ENV
 ENV VITE_API_URL=$VITE_API_URL
+
+# Verificar que TypeScript esté instalado
+RUN npx tsc --version || (echo "TypeScript no encontrado, instalando..." && npm install typescript --save-dev)
 
 # Build de producción
 RUN npm run build
