@@ -1,1 +1,88 @@
 @import "tailwindcss";
+
+/* Estilos personalizados para el kiosco de menú */
+.kiosk-container {
+  /* Asegurar que el contenedor use toda la altura de la pantalla */
+  height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para mejor compatibilidad */
+}
+
+/* Scrollbar personalizado para las secciones de comida */
+.meal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.meal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.meal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.meal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Para Firefox */
+.meal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+/* Optimización para pantallas 16:9 */
+@media (aspect-ratio: 16/9) {
+  .kiosk-grid {
+    gap: 1.5rem; /* Aumentar gap para mejor separación */
+  }
+  
+  .meal-card {
+    padding: 1.5rem; /* Aumentar padding para mejor aprovechamiento del espacio */
+  }
+  
+  .meal-title {
+    font-size: 2rem; /* Aumentar tamaño de título */
+  }
+  
+  .meal-item {
+    padding: 1rem; /* Aumentar padding de items */
+  }
+  
+  .meal-item-title {
+    font-size: 1.25rem; /* Aumentar tamaño de título de item */
+  }
+}
+
+/* Optimización para pantallas con mucho espacio vertical */
+@media (min-height: 1080px) {
+  .kiosk-container {
+    padding: 2rem 0;
+  }
+  
+  .meal-card {
+    padding: 2rem;
+  }
+  
+  .meal-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .meal-item {
+    padding: 1.25rem;
+  }
+  
+  .meal-item-title {
+    font-size: 1.375rem;
+  }
+}
+
+/* Optimización para pantallas más anchas */
+@media (min-width: 1920px) {
+  .kiosk-container {
+    max-width: 90vw;
+  }
+}

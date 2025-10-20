@@ -100,10 +100,10 @@ export default function MenuKiosk() {
   }
 
   return (
-    <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
-      <div className="h-full max-w-7xl mx-auto px-8 py-8">
+    <div className="kiosk-container bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
+      <div className="h-full max-w-7xl mx-auto px-6 py-6">
         {todayMenu ? (
-          <div className="h-full grid grid-cols-3 gap-8">
+          <div className="h-full kiosk-grid grid grid-cols-3 gap-6">
             {(['breakfast', 'lunch', 'dinner'] as const).map(mealType => {
               const meal = todayMenu.meals.find(m => m.type === mealType);
               
@@ -121,25 +121,25 @@ export default function MenuKiosk() {
               };
               
               return (
-                <div key={mealType} className={`flex flex-col rounded-2xl border-2 p-6 shadow-xl ${mealStyles[mealType]} backdrop-blur-sm`}>
-                  {/* Título con icono */}
-                  <div className="text-center mb-8">
-                    <div className="flex items-center justify-center mb-4">
-                      <span className="text-5xl mr-3">{iconStyles[mealType]}</span>
+                <div key={mealType} className={`meal-card flex flex-col rounded-2xl border-2 p-6 shadow-xl ${mealStyles[mealType]} backdrop-blur-sm`}>
+                  {/* Título con icono - altura fija */}
+                  <div className="text-center mb-6 flex-shrink-0">
+                    <div className="flex items-center justify-center mb-3">
+                      <span className="text-4xl mr-3">{iconStyles[mealType]}</span>
                     </div>
-                    <h2 className="text-4xl font-bold text-gray-800 drop-shadow-sm">
+                    <h2 className="meal-title text-3xl font-bold text-gray-800 drop-shadow-sm">
                       {mealTypeLabels[mealType]}
                     </h2>
                   </div>
 
-                  {/* Lista de platos */}
-                  <div className="flex-1">
+                  {/* Lista de platos - con scroll interno */}
+                  <div className="meal-scroll flex-1 overflow-y-auto">
                     {meal && meal.items.length > 0 ? (
-                      <div className="space-y-6">
+                      <div className="space-y-4 pr-2">
                         {meal.items.map((item) => (
                           <div key={item.id} className="text-center">
-                            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50">
-                              <h3 className="text-2xl font-semibold text-gray-900 mb-3 leading-tight">
+                            <div className="meal-item bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50">
+                              <h3 className="meal-item-title text-xl font-semibold text-gray-900 mb-3 leading-tight">
                                 {item.name}
                               </h3>
                               {item.allergens.length > 0 && (
@@ -150,7 +150,7 @@ export default function MenuKiosk() {
                                       className="flex items-center justify-center"
                                       title={allergen}
                                     >
-                                      <AllergenIcon allergen={allergen} className="w-8 h-8" />
+                                      <AllergenIcon allergen={allergen} className="w-7 h-7" />
                                     </span>
                                   ))}
                                 </div>
@@ -160,9 +160,9 @@ export default function MenuKiosk() {
                         ))}
                       </div>
                     ) : (
-                      <div className="text-center py-16">
+                      <div className="text-center py-12">
                         <div className="bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/50">
-                          <p className="text-gray-600 text-2xl font-medium">
+                          <p className="text-gray-600 text-xl font-medium">
                             Sin {mealTypeLabels[mealType].toLowerCase()}
                           </p>
                         </div>
