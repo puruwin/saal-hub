@@ -1,6 +1,10 @@
 # Etapa 1: Build
 FROM node:20-slim AS builder
 
+# Argumentos de build
+ARG NODE_ENV=production
+ARG VITE_API_URL=localhost
+
 WORKDIR /app
 
 # Instalar dependencias para compilación en Raspberry Pi
@@ -20,6 +24,10 @@ RUN npm install --no-optional && \
 
 # Copiamos código fuente
 COPY . .
+
+# Configurar variables de entorno para el build
+ENV NODE_ENV=$NODE_ENV
+ENV VITE_API_URL=$VITE_API_URL
 
 # Build de producción
 RUN npm run build
