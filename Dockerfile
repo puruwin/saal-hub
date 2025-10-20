@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install -y \
 COPY package*.json ./
 
 # Instalación optimizada para Raspberry Pi
-# Primero instalar sin optional dependencies, luego instalar rollup para ARM64
-RUN npm install --no-optional && \
+# Instalar todas las dependencias incluyendo devDependencies para el build
+RUN npm install && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
