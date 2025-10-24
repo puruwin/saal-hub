@@ -45,7 +45,18 @@ export default function DayMenuView() {
             setIsLoading(true);
             setError(null);
 
-            const menu = await menuService.getMenuByDate(date);
+            // Si es domingo, buscar el menú del sábado
+            const selectedDate = new Date(date);
+            let searchDate = date;
+            
+            if (selectedDate.getDay() === 0) {
+                // Es domingo, buscar sábado
+                const saturday = new Date(selectedDate);
+                saturday.setDate(selectedDate.getDate() - 1);
+                searchDate = saturday.toISOString().split('T')[0];
+            }
+
+            const menu = await menuService.getMenuByDate(searchDate);
             setDayMenu(menu);
         } catch (err: any) {
             console.error('Error cargando menú del día:', err);
@@ -65,6 +76,18 @@ export default function DayMenuView() {
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
+        const dayOfWeek = date.getDay();
+        
+        // Si es sábado o domingo, mostrar como "Fin de semana"
+        if (dayOfWeek === 6 || dayOfWeek === 0) {
+            const saturday = dayOfWeek === 0 
+                ? new Date(date.getTime() - 24 * 60 * 60 * 1000) 
+                : date;
+            const sunday = new Date(saturday.getTime() + 24 * 60 * 60 * 1000);
+            
+            return `Fin de semana (${saturday.getDate()}-${sunday.getDate()} de ${saturday.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })})`;
+        }
+        
         return date.toLocaleDateString('es-ES', {
             weekday: 'long',
             year: 'numeric',

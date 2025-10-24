@@ -147,8 +147,25 @@ export default function Dashboard() {
   };
 
   const getMenuForDate = (date: Date) => {
-    const dateStr = date.toISOString().split('T')[0];
+    // Si es domingo (day 0), buscar el menú del sábado
+    let searchDate = new Date(date);
+    if (searchDate.getDay() === 0) {
+      // Es domingo, retroceder un día para buscar sábado
+      searchDate.setDate(searchDate.getDate() - 1);
+    }
+    
+    const dateStr = searchDate.toISOString().split('T')[0];
     return menus.find(menu => menu.date === dateStr);
+  };
+
+  const getDateForMenu = (date: Date) => {
+    // Si es domingo, usar la fecha del sábado para operaciones
+    if (date.getDay() === 0) {
+      const saturday = new Date(date);
+      saturday.setDate(saturday.getDate() - 1);
+      return saturday;
+    }
+    return date;
   };
 
   // Cargar menús cuando el usuario se autentique
@@ -230,33 +247,38 @@ export default function Dashboard() {
             </div>
 
             {viewMode === 'daily' && (
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => {
-                    const newDate = new Date(selectedDate);
-                    newDate.setDate(newDate.getDate() - 1);
-                    setSelectedDate(newDate);
-                  }}
-                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
-                >
-                  ←
-                </button>
-                <input
-                  type="date"
-                  value={selectedDate.toISOString().split('T')[0]}
-                  onChange={(e) => setSelectedDate(new Date(e.target.value))}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button
-                  onClick={() => {
-                    const newDate = new Date(selectedDate);
-                    newDate.setDate(newDate.getDate() + 1);
-                    setSelectedDate(newDate);
-                  }}
-                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
-                >
-                  →
-                </button>
+              <div className="flex flex-col items-center space-y-1">
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => {
+                      const newDate = new Date(selectedDate);
+                      newDate.setDate(newDate.getDate() - 1);
+                      setSelectedDate(newDate);
+                    }}
+                    className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
+                  >
+                    ←
+                  </button>
+                  <input
+                    type="date"
+                    value={selectedDate.toISOString().split('T')[0]}
+                    onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    onClick={() => {
+                      const newDate = new Date(selectedDate);
+                      newDate.setDate(newDate.getDate() + 1);
+                      setSelectedDate(newDate);
+                    }}
+                    className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
+                  >
+                    →
+                  </button>
+                </div>
+                <div className="text-sm font-medium text-blue-700">
+                  📅 {selectedDate.toLocaleDateString('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/')}
+                </div>
               </div>
             )}
           </div>
@@ -298,12 +320,34 @@ export default function Dashboard() {
               onMenuUpdate={handleMenuUpdate} 
             />
           ) : (
-            <DayEditor
-              menu={getMenuForDate(selectedDate) ?? null}
-              date={selectedDate}
-              onMenuUpdate={handleMenuUpdate}
-              onMenuCreate={handleMenuCreate}
-            />
+            <>
+              {selectedDate.getDay() === 0 && (
+                <div className="mb-4 bg-blue-50 border-l-4 border-blue-400 p-4">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm text-blue-700">
+                        <strong>Fin de semana unificado:</strong> El sábado y domingo comparten el mismo menú. Estás viendo/editando el menú del sábado.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <DayEditor
+                menu={getMenuForDate(selectedDate) ?? null}
+                date={getDateForMenu(selectedDate)}
+                onMenuUpdate={handleMenuUpdate}
+                onMenuCreate={(dateStr) => {
+                  // Si es domingo, crear con fecha de sábado
+                  const menuDate = getDateForMenu(selectedDate);
+                  handleMenuCreate(menuDate.toISOString().split('T')[0]);
+                }}
+              />
+            </>
           )}
         </div>
       </main>

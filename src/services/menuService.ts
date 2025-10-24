@@ -201,5 +201,35 @@ export const menuService = {
       console.error('Error eliminando menú:', error);
       throw error;
     }
+  },
+
+  // Importación masiva de menús escolares
+  async bulkImportMenus(startDate: string, menuData: any): Promise<{ message: string; count: number }> {
+    try {
+      const response = await apiClient.post('/menus/bulk-import', {
+        startDate,
+        menuData
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error en importación masiva:', error);
+      throw error;
+    }
+  },
+
+  // Borrado masivo de menús por rango de fechas
+  async bulkDeleteMenus(startDate: string, endDate: string): Promise<{ message: string; count: number; deletedMenus: string[] }> {
+    try {
+      const response = await apiClient.delete('/menus/bulk-delete', {
+        params: {
+          startDate,
+          endDate
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error en borrado masivo:', error);
+      throw error;
+    }
   }
 };

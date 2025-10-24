@@ -53,8 +53,10 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
 
   const dateStr = date.toISOString().split('T')[0];
   const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
-  const dayNumber = date.getDate();
-  const monthName = date.toLocaleDateString('es-ES', { month: 'long' });
+  const dayNumber = date.getDate().toString().padStart(2, '0');
+  const monthName = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  const formattedDate = `${dayNumber}/${monthName}/${year}`;
 
   const getMealByType = (type: 'breakfast' | 'lunch' | 'dinner') => {
     return menu?.meals.find(meal => meal.type === type);
@@ -200,7 +202,7 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="text-center">
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            {dayName.charAt(0).toUpperCase() + dayName.slice(1)} {dayNumber} de {monthName}
+            {dayName.charAt(0).toUpperCase() + dayName.slice(1)} - {formattedDate}
           </h3>
           <p className="text-gray-600 mb-4">No hay menú creado para este día</p>
           <button
@@ -219,7 +221,7 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
       <div className="p-6 border-b">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold text-gray-900">
-            {dayName.charAt(0).toUpperCase() + dayName.slice(1)} {dayNumber} de {monthName}
+            {dayName.charAt(0).toUpperCase() + dayName.slice(1)} - {formattedDate}
           </h3>
           <button
             onClick={handleViewDayMenu}

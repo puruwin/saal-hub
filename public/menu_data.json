@@ -1,0 +1,2926 @@
+{
+  "allergens": [],
+  "weeks": [
+    {
+      "week": 0,
+      "days": [
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Sopa / Gazpacho",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado campestre",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Queso fresco",
+                  "allergens": []
+                },
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Macarrones a la bolognesa",
+                  "allergens": []
+                },
+                {
+                  "name": "Postre: Frutas de temporada",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Pizzas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensaladilla",
+                  "allergens": []
+                },
+                {
+                  "name": "Albondigas en tomate",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuletas a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 1,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso crema",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Tumbet mallorquín",
+                  "allergens": []
+                },
+                {
+                  "name": "Espaguetis a la carbonara",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Champiñones salteados",
+                  "allergens": []
+                },
+                {
+                  "name": "Alitas de pollo al horno",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Bacon asado",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Paella",
+                  "allergens": []
+                },
+                {
+                  "name": "Tarta de queso",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Pisto manchego",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado al horno (salsa teriyaqui)",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Caña de lomo",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Brócoli gratinado",
+                  "allergens": []
+                },
+                {
+                  "name": "Lomo al horno en salsa",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Tortilla de patatas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Queso fresco",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Lentejas con costillas y chorizo",
+                  "allergens": []
+                },
+                {
+                  "name": "Flan de huevo",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado de verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Merluza en salsa verde",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz basmati",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo a la cazadora",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas fritas",
+                  "allergens": []
+                },
+                {
+                  "name": "Hamburguesa con bacon asado",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Donuts original, de chocolate y azebrado",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de pasta",
+                  "allergens": []
+                },
+                {
+                  "name": "Crema de verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo salteado con verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Estofado de cerdo",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Lomo embuchado",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso brie",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Foccacia",
+                  "allergens": []
+                },
+                {
+                  "name": "Lasagna a la bolognesa",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Salmorejo / Crema de calabacín",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuleta de cerdo a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas al horno",
+                  "allergens": []
+                },
+                {
+                  "name": "Pavo en salsa",
+                  "allergens": []
+                },
+                {
+                  "name": "Natillas",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Crema de puerros con picatostes",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Bizcocho de zanahoria",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso crema",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado del día al horno",
+                  "allergens": []
+                },
+                {
+                  "name": "Rissotto de champiñones",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Salchichas criollas al horno",
+                  "allergens": []
+                },
+                {
+                  "name": "Tortilla de espárragos",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz de presa de cerdo",
+                  "allergens": []
+                },
+                {
+                  "name": "Tarta de chocolate",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Boniato al horno",
+                  "allergens": []
+                },
+                {
+                  "name": "Cazón en adobo",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Couscous",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo garam masala",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Pizzas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Donuts original, de chocolate y azebrado",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensaladilla",
+                  "allergens": []
+                },
+                {
+                  "name": "Crema de verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Carne con tomate",
+                  "allergens": []
+                },
+                {
+                  "name": "Estofado de cerdo",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso fresco",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada sencilla",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas panaderas",
+                  "allergens": []
+                },
+                {
+                  "name": "Lomo al horno",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada sencilla",
+                  "allergens": []
+                },
+                {
+                  "name": "Champiñones salteados",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamoncitos de pollo asado",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Salchichas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo salteado con verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Tiramisú",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Escalivada",
+                  "allergens": []
+                },
+                {
+                  "name": "Empanadilla de atún",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Berenjenas a la parmesana",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado del día al horno",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Rollitos de primavera",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz tres delicias",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Huevos cocidos",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Garbanzos con buñuelos de bacalao",
+                  "allergens": []
+                },
+                {
+                  "name": "Lemon pie",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado campestre",
+                  "allergens": []
+                },
+                {
+                  "name": "Costillas a la barbacoa",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Churros",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Ragú de pavo con patatas asadas",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Cena mexicana",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Donuts original, de chocolate y azebrado",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Vichisoisse",
+                  "allergens": []
+                },
+                {
+                  "name": "Macarrones con tomate",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo al ajillo",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuletas asadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso brie",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría",
+                  "allergens": []
+                },
+                {
+                  "name": "Lasagna de atún y espinacas",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Verduras y patatas al vapor",
+                  "allergens": []
+                },
+                {
+                  "name": "Calamares fritos",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Piña en su jugo",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Pico de gallo",
+                  "allergens": []
+                },
+                {
+                  "name": "Cochinita pibil con arroz",
+                  "allergens": []
+                },
+                {
+                  "name": "Brownie",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Gazpacho",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pollo a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Bizcocho de nueces",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso crema",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Purrusalda",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado del día al horno",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Tortilla de patatas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz a la cubana con huevo frito",
+                  "allergens": []
+                },
+                {
+                  "name": "Longaniza criolla",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz con leche",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Guisantes y verduras salteadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Croquetas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado de ajetes tiernos",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuletas de pavo asadas",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas fritas",
+                  "allergens": []
+                },
+                {
+                  "name": "Perritos",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Donuts original, de chocolate y azebrado",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada sencilla",
+                  "allergens": []
+                },
+                {
+                  "name": "Espirales de pasta con tomate",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo con almendras",
+                  "allergens": []
+                },
+                {
+                  "name": "Albóndigas en salsa",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso crema",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada caprese con aceitunas negras",
+                  "allergens": []
+                },
+                {
+                  "name": "Berenjenas salteadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Espaguetis a la carbonara",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada caprese con aceitunas negras",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría",
+                  "allergens": []
+                },
+                {
+                  "name": "Alitas de pollo a la barbacoa",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Bacon asado",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Lomo al horno en salsa",
+                  "allergens": []
+                },
+                {
+                  "name": "Risotto de champiñón",
+                  "allergens": []
+                },
+                {
+                  "name": "Natillas de chocolate",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Judías verdes al vapor",
+                  "allergens": []
+                },
+                {
+                  "name": "Salmón al horno con salsa teriyaqui",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Caña de lomo",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado campestre",
+                  "allergens": []
+                },
+                {
+                  "name": "Guiso de patatas con ternera",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Vichyssoise",
+                  "allergens": []
+                },
+                {
+                  "name": "Paninis variados",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Lentejas con costillas y chorizo",
+                  "allergens": []
+                },
+                {
+                  "name": "Tarta de zanahoria",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Queso fresco",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Paella",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas fritas",
+                  "allergens": []
+                },
+                {
+                  "name": "Hamburguesa",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Creps con nutella",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de pasta",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría",
+                  "allergens": []
+                },
+                {
+                  "name": "Pavo en salsa",
+                  "allergens": []
+                },
+                {
+                  "name": "Estofado de cerdo",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Lomo embuchado",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso brie",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Macarrones a la bolognesa",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada César",
+                  "allergens": []
+                },
+                {
+                  "name": "Pimientos asados",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuletas al horno",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Puré parmentier",
+                  "allergens": []
+                },
+                {
+                  "name": "Costillas a la barbacoa",
+                  "allergens": []
+                },
+                {
+                  "name": "Tarta de queso",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz tres delicias",
+                  "allergens": []
+                },
+                {
+                  "name": "Rollitos de primavera",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Salteado campestre",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado del día al horno",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Judías verdes salteadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tortilla de patatas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas asadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Carrillera de cerdo",
+                  "allergens": []
+                },
+                {
+                  "name": "Flan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Escalivada",
+                  "allergens": []
+                },
+                {
+                  "name": "Croquetas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Bizcocho de zanahoria",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso burgos",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz basmati",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo garam masala",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada de canónigos y frutos secos",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Gazpacho",
+                  "allergens": []
+                },
+                {
+                  "name": "Pizzas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Creps con nutella",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensaladilla (sin huevo)",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Gazpacho",
+                  "allergens": []
+                },
+                {
+                  "name": "Carne con tomate",
+                  "allergens": []
+                },
+                {
+                  "name": "Estofado de cordero",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso burgos",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Focaccia",
+                  "allergens": []
+                },
+                {
+                  "name": "Ravioli a la carbonara",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Tortilla de calabacín",
+                  "allergens": []
+                },
+                {
+                  "name": "Calamares fritos",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Salchichas",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Gazpacho",
+                  "allergens": []
+                },
+                {
+                  "name": "Solomillo al whisky",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz con leche",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada mixta",
+                  "allergens": []
+                },
+                {
+                  "name": "Berenjenas estilo indio",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pollo a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Caña de lomo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas asadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Carrillera de cerdo",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Guisantes salteados",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado al horno",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Judías verdes al vapor",
+                  "allergens": []
+                },
+                {
+                  "name": "Garbanzos con buñuelos de bacalao",
+                  "allergens": []
+                },
+                {
+                  "name": "Milhojas con crema pastelera",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada griega",
+                  "allergens": []
+                },
+                {
+                  "name": "Espinacas a la catalana",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamoncitos de pollo asado",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Churros",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada de escarola",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Churrasco de cordero con patatas fritas",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Cena mexicana",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Creps con nutella",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Sopa fría / Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Ensalada de espirales",
+                  "allergens": []
+                },
+                {
+                  "name": "Empanadas de jamón y queso",
+                  "allergens": []
+                },
+                {
+                  "name": "Pollo salteado con verduras",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "days": [
+        {
+          "day": "LUN",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Porridge",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga de pavo",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso brie",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Lentejas con verduras",
+                  "allergens": []
+                },
+                {
+                  "name": "Chuletas de cerdo",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Arroz tres delicias",
+                  "allergens": []
+                },
+                {
+                  "name": "Rollitos de primavera",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MAR",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Huevos revueltos",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso burgos",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada clásica",
+                  "allergens": []
+                },
+                {
+                  "name": "Escalivada",
+                  "allergens": []
+                },
+                {
+                  "name": "Ragú de pavo con patatas asadas",
+                  "allergens": []
+                },
+                {
+                  "name": "Natillas de huevo",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada clásica",
+                  "allergens": []
+                },
+                {
+                  "name": "Champiñones salteados",
+                  "allergens": []
+                },
+                {
+                  "name": "Pechuga a la plancha",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "MIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Bizcocho de nueces",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso crema",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Patatas a la riojana",
+                  "allergens": []
+                },
+                {
+                  "name": "Pescado al horno",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada verde",
+                  "allergens": []
+                },
+                {
+                  "name": "Alitas de pollo a la barbacoa",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "JUE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Yogur y granola",
+                  "allergens": []
+                },
+                {
+                  "name": "Jamón serrano",
+                  "allergens": []
+                },
+                {
+                  "name": "Zumo de naranja",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Sopa fría / Salmorejo",
+                  "allergens": []
+                },
+                {
+                  "name": "Lasagna de atún y verduras",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Coleslaw",
+                  "allergens": []
+                },
+                {
+                  "name": "Picada de pepinillos",
+                  "allergens": []
+                },
+                {
+                  "name": "Perritos calientes con patatas fritas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "VIE",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Jamón york",
+                  "allergens": []
+                },
+                {
+                  "name": "Aguacate",
+                  "allergens": []
+                },
+                {
+                  "name": "Queso en lonchas",
+                  "allergens": []
+                },
+                {
+                  "name": "Tomate rallado",
+                  "allergens": []
+                },
+                {
+                  "name": "Pan",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Menú especial: viernes de graduación, postre especial y vino",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "dinner",
+              "items": [
+                {
+                  "name": "Ensalada completa",
+                  "allergens": []
+                },
+                {
+                  "name": "Pizzas variadas",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": "SAB_DOM",
+          "meals": [
+            {
+              "type": "breakfast",
+              "items": [
+                {
+                  "name": "Creps con nutella",
+                  "allergens": []
+                }
+              ]
+            },
+            {
+              "type": "lunch",
+              "items": [
+                {
+                  "name": "Primer y segundo plato",
+                  "allergens": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+    
