@@ -104,29 +104,17 @@ export default function Dashboard() {
 
   // Funciones para manejar menús
   const handleMenuUpdate = async (updatedMenu: Menu) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const result = await menuService.updateMenu(updatedMenu.id, {
-        meals: updatedMenu.meals
-      });
-      
-      setMenus(prev => {
-        const existingIndex = prev.findIndex(m => m.id === result.id);
-        if (existingIndex >= 0) {
-          const newMenus = [...prev];
-          newMenus[existingIndex] = result;
-          return newMenus;
-        } else {
-          return [...prev, result];
-        }
-      });
-    } catch (err) {
-      console.error('Error actualizando menú:', err);
-      setError('Error al actualizar el menú. Inténtalo de nuevo.');
-    } finally {
-      setLoading(false);
-    }
+    // Solo actualizar el estado local, las operaciones individuales ya se guardan en el servidor
+    setMenus(prev => {
+      const existingIndex = prev.findIndex(m => m.id === updatedMenu.id);
+      if (existingIndex >= 0) {
+        const newMenus = [...prev];
+        newMenus[existingIndex] = updatedMenu;
+        return newMenus;
+      } else {
+        return [...prev, updatedMenu];
+      }
+    });
   };
 
   const handleMenuCreate = async (date: string) => {

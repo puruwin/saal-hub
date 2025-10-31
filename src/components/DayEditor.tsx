@@ -50,6 +50,9 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
   const [newItemAllergens, setNewItemAllergens] = useState<string[]>([]);
   const [showAddItem, setShowAddItem] = useState<'breakfast' | 'lunch' | 'dinner' | null>(null);
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<{ id: number; name: string; allergens: string[]; usageCount: number }[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
 
   const dateStr = date.toISOString().split('T')[0];
   const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
@@ -60,6 +63,53 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
 
   const getMealByType = (type: 'breakfast' | 'lunch' | 'dinner') => {
     return menu?.meals.find(meal => meal.type === type);
+  };
+
+  // Buscar sugerencias de platos
+  const handleNameChange = async (value: string) => {
+    setNewItemName(value);
+    
+    if (value.trim().length >= 2) {
+      const results = await menuService.searchPlateTemplates(value.trim());
+      setSuggestions(results);
+      setShowSuggestions(results.length > 0);
+      setSelectedSuggestionIndex(-1);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  // Seleccionar una sugerencia
+  const selectSuggestion = (suggestion: { id: number; name: string; allergens: string[] }) => {
+    setNewItemName(suggestion.name);
+    setNewItemAllergens(suggestion.allergens);
+    setShowSuggestions(false);
+    setSuggestions([]);
+    // Incrementar contador de uso
+    menuService.incrementPlateTemplateUsage(suggestion.id);
+  };
+
+  // Manejar teclas de navegación en autocompletado
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedSuggestionIndex(prev => 
+        prev < suggestions.length - 1 ? prev + 1 : 0
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedSuggestionIndex(prev => 
+        prev > 0 ? prev - 1 : suggestions.length - 1
+      );
+    } else if (e.key === 'Enter' && selectedSuggestionIndex >= 0) {
+      e.preventDefault();
+      selectSuggestion(suggestions[selectedSuggestionIndex]);
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+    }
   };
 
   const handleAddItem = async (mealType: 'breakfast' | 'lunch' | 'dinner') => {
@@ -73,31 +123,35 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
         allergens: newItemAllergens
       };
 
+      // Guardar o actualizar la plantilla del plato automáticamente
+      try {
+        await menuService.savePlateTemplate(newItemData.name, newItemData.allergens);
+      } catch (error) {
+        console.warn('No se pudo guardar la plantilla del plato:', error);
+        // No detenemos el flujo si falla guardar la plantilla
+      }
+
       if (meal && menu) {
         // Agregar item a comida existente usando la API
-        const newItem = await menuService.addMealItem(menu.id, meal.id, newItemData);
+        await menuService.addMealItem(menu.id, meal.id, newItemData);
         
-        const updatedMenu = {
-          ...menu,
-          meals: menu.meals.map(m => 
-            m.id === meal.id 
-              ? { ...m, items: [...m.items, newItem] }
-              : m
-          )
-        };
-        onMenuUpdate(updatedMenu);
+        // Recargar el menú completo desde el servidor para obtener los IDs actualizados
+        const refreshedMenu = await menuService.getMenuByDate(dateStr);
+        if (refreshedMenu) {
+          onMenuUpdate(refreshedMenu);
+        }
       } else if (menu) {
         // Crear nueva comida en menú existente
-        const newMeal = await menuService.addMeal(menu.id, {
+        await menuService.addMeal(menu.id, {
           type: mealType,
           items: [newItemData]
         });
 
-        const updatedMenu = {
-          ...menu,
-          meals: [...menu.meals, newMeal]
-        };
-        onMenuUpdate(updatedMenu);
+        // Recargar el menú completo desde el servidor
+        const refreshedMenu = await menuService.getMenuByDate(dateStr);
+        if (refreshedMenu) {
+          onMenuUpdate(refreshedMenu);
+        }
       } else {
         // Crear menú completo nuevo
         const newMenu = await menuService.createMenu({
@@ -113,8 +167,12 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
       setNewItemName('');
       setNewItemAllergens([]);
       setShowAddItem(null);
-    } catch (error) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    } catch (error: any) {
       console.error('Error agregando plato:', error);
+      const errorMessage = error.message || 'Error al agregar el plato. Por favor, inténtalo de nuevo.';
+      alert(`❌ Error: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -254,13 +312,59 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
               {showAddItem === mealType && (
                 <div className="mb-4 p-4 bg-white rounded-lg border">
                   <div className="space-y-3">
-                    <input
-                      type="text"
-                      placeholder="Nombre del plato"
-                      value={newItemName}
-                      onChange={(e) => setNewItemName(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Nombre del plato (escribe para buscar)"
+                        value={newItemName}
+                        onChange={(e) => handleNameChange(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        onFocus={() => {
+                          if (suggestions.length > 0) {
+                            setShowSuggestions(true);
+                          }
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        autoComplete="off"
+                      />
+                      
+                      {/* Dropdown de sugerencias */}
+                      {showSuggestions && suggestions.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {suggestions.map((suggestion, index) => (
+                            <button
+                              key={suggestion.id}
+                              type="button"
+                              onClick={() => selectSuggestion(suggestion)}
+                              className={`w-full text-left px-4 py-3 hover:bg-blue-50 border-b border-gray-100 last:border-b-0 ${
+                                index === selectedSuggestionIndex ? 'bg-blue-50' : ''
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1">
+                                  <div className="font-medium text-gray-900">{suggestion.name}</div>
+                                  {suggestion.allergens.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                      {suggestion.allergens.map((allergen, idx) => (
+                                        <span 
+                                          key={idx}
+                                          className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full"
+                                        >
+                                          {allergen}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="ml-2 text-xs text-gray-500">
+                                  {suggestion.usageCount}x usado
+                                </div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -297,6 +401,8 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
                           setShowAddItem(null);
                           setNewItemName('');
                           setNewItemAllergens([]);
+                          setSuggestions([]);
+                          setShowSuggestions(false);
                         }}
                         className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
                       >

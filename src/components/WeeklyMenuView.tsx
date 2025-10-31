@@ -3,6 +3,7 @@ import AllergenIcon from "./AllergenIcon";
 import { menuService } from "../services/menuService";
 import BulkImportModal from "./BulkImportModal";
 import BulkDeleteModal from "./BulkDeleteModal";
+import DayEditor from "./DayEditor";
 
 interface MealItem {
   id: number;
@@ -48,6 +49,7 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
   const [weekOffset, setWeekOffset] = useState(0); // 0 = semana actual, -1 = semana anterior, 1 = semana siguiente
   const [weekMenus, setWeekMenus] = useState<Menu[]>(initialMenus);
   const [loadingWeek, setLoadingWeek] = useState(false);
+  const [editingDate, setEditingDate] = useState<Date | null>(null);
 
   const getCurrentWeekStart = () => {
     const today = new Date();
@@ -243,6 +245,27 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
     window.open(`/menu/${dateStr}`, '_blank');
   };
 
+  const handleEditDayMenu = (date: Date) => {
+    setEditingDate(date);
+  };
+
+  const handleBackToWeeklyView = () => {
+    setEditingDate(null);
+  };
+
+  const handleMenuCreate = async (dateStr: string) => {
+    try {
+      const newMenu = await menuService.createMenu({
+        date: dateStr,
+        meals: []
+      });
+      setWeekMenus(prev => [...prev, newMenu]);
+      onMenuUpdate(newMenu);
+    } catch (error) {
+      console.error('Error creando menú:', error);
+    }
+  };
+
   const handleBulkImport = async (startDate: string) => {
     try {
       // Importar los datos del JSON
@@ -274,6 +297,35 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
       throw error;
     }
   };
+
+  // Si estamos editando un día específico, mostrar el DayEditor
+  if (editingDate) {
+    const dateStr = editingDate.toISOString().split('T')[0];
+    const menuForDay = weekMenus.find(m => m.date === dateStr);
+    
+    return (
+      <div>
+        <button
+          onClick={handleBackToWeeklyView}
+          className="mb-4 flex items-center text-blue-600 hover:text-blue-700 font-medium"
+        >
+          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Volver a Vista Semanal
+        </button>
+        <DayEditor
+          menu={menuForDay || null}
+          date={editingDate}
+          onMenuUpdate={(updatedMenu) => {
+            setWeekMenus(prev => prev.map(m => m.id === updatedMenu.id ? updatedMenu : m));
+            onMenuUpdate(updatedMenu);
+          }}
+          onMenuCreate={handleMenuCreate}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -462,12 +514,27 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
 
                   {/* Nueva columna de acciones */}
                   <td className="p-4">
-                    <button
-                      onClick={() => handleViewDayMenu(day)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full"
-                    >
-                      Ver Menú
-                    </button>
+                    <div className="flex flex-col space-y-2">
+                      <button
+                        onClick={() => handleEditDayMenu(day)}
+                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full flex items-center justify-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        Editar Día
+                      </button>
+                      <button
+                        onClick={() => handleViewDayMenu(day)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors w-full flex items-center justify-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Ver Menú
+                      </button>
+                    </div>
                   </td>
                 </tr>
               );

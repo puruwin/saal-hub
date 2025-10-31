@@ -61,8 +61,8 @@ export interface Menu {
 // Transformar datos del backend al formato del frontend
 const transformMealItem = (item: any): { id: number; name: string; allergens: string[] } => ({
   id: item.id,
-  name: item.name,
-  allergens: item.allergens.map((a: any) => a.allergen.name)
+  name: item.dish?.name || item.name, // Soporte para nueva estructura (dish) y retrocompatibilidad
+  allergens: item.dish?.allergens?.map((a: any) => a.allergen.name) || item.allergens?.map((a: any) => a.allergen.name) || []
 });
 
 const transformMeal = (meal: any): { id: number; type: 'breakfast' | 'lunch' | 'dinner'; items: any[] } => ({
@@ -155,9 +155,18 @@ export const menuService = {
     try {
       const response = await apiClient.post(`/menus/${menuId}/meals/${mealId}/items`, item);
       return transformMealItem(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error agregando plato:', error);
-      throw error;
+      const errorMsg = error.response?.data?.error || error.message || 'Error desconocido';
+      const errorCode = error.response?.data?.code;
+      
+      if (errorCode === 'MEAL_NOT_FOUND') {
+        throw new Error(`La comida no existe. Por favor, recarga la página e inténtalo de nuevo.`);
+      } else if (errorCode === 'MENU_NOT_FOUND') {
+        throw new Error(`El menú no existe. Por favor, recarga la página e inténtalo de nuevo.`);
+      }
+      
+      throw new Error(errorMsg);
     }
   },
 
@@ -204,7 +213,7 @@ export const menuService = {
   },
 
   // Importación masiva de menús escolares
-  async bulkImportMenus(startDate: string, menuData: any): Promise<{ message: string; count: number }> {
+  async bulkImportMenus(startDate: string, menuData: any): Promise<{ message: string; count: number; skipped: number; errors: number; templatesCreated: number; templatesUpdated: number }> {
     try {
       const response = await apiClient.post('/menus/bulk-import', {
         startDate,
@@ -230,6 +239,58 @@ export const menuService = {
     } catch (error) {
       console.error('Error en borrado masivo:', error);
       throw error;
+    }
+  },
+
+  // === SERVICIOS PARA PLANTILLAS DE PLATOS ===
+
+  // Buscar plantillas de platos por nombre (autocompletado)
+  async searchPlateTemplates(query: string): Promise<{ id: number; name: string; allergens: string[]; usageCount: number }[]> {
+    try {
+      if (!query || query.trim().length < 2) {
+        return [];
+      }
+      const response = await apiClient.get('/plate-templates/search', {
+        params: { query }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error buscando plantillas:', error);
+      return [];
+    }
+  },
+
+  // Obtener todas las plantillas de platos
+  async getAllPlateTemplates(): Promise<{ id: number; name: string; allergens: string[]; usageCount: number }[]> {
+    try {
+      const response = await apiClient.get('/plate-templates');
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo plantillas:', error);
+      return [];
+    }
+  },
+
+  // Crear o actualizar una plantilla de plato
+  async savePlateTemplate(name: string, allergens: string[]): Promise<{ id: number; name: string; allergens: string[]; usageCount: number }> {
+    try {
+      const response = await apiClient.post('/plate-templates', {
+        name,
+        allergens
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error guardando plantilla:', error);
+      throw error;
+    }
+  },
+
+  // Incrementar contador de uso de una plantilla
+  async incrementPlateTemplateUsage(id: number): Promise<void> {
+    try {
+      await apiClient.post(`/plate-templates/${id}/use`);
+    } catch (error) {
+      console.error('Error incrementando contador:', error);
     }
   }
 };

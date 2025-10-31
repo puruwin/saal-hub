@@ -3,7 +3,7 @@ import { useState } from "react";
 interface BulkImportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (startDate: string) => Promise<{ count: number; skipped?: number; errors?: number } | undefined>;
+  onConfirm: (startDate: string) => Promise<{ count: number; skipped?: number; errors?: number; templatesCreated?: number; templatesUpdated?: number } | undefined>;
 }
 
 const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) => {
@@ -52,7 +52,11 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
     setError('');
     try {
       const result = await onConfirm(startDate);
-      alert(`✅ Importación completada!\n\n📊 Resumen:\n- Menús creados: ${result?.count || 0}\n- Menús omitidos: ${result?.skipped || 0}\n- Errores: ${result?.errors || 0}\n\nLos menús se han actualizado automáticamente.`);
+      const templatesInfo = (result?.templatesCreated || result?.templatesUpdated) 
+        ? `\n\n🍽️ Plantillas de Platos:\n- Nuevas plantillas creadas: ${result?.templatesCreated || 0}\n- Plantillas actualizadas: ${result?.templatesUpdated || 0}\n\n💡 Ahora puedes usar el autocompletado para agregar estos platos rápidamente.`
+        : '';
+      
+      alert(`✅ Importación completada!\n\n📊 Resumen:\n- Menús creados: ${result?.count || 0}\n- Menús omitidos: ${result?.skipped || 0}\n- Errores: ${result?.errors || 0}${templatesInfo}\n\nLos menús se han actualizado automáticamente.`);
       handleClose();
     } catch (err: any) {
       const details = err.response?.data?.details || err.message || 'Error desconocido';
