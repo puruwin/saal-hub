@@ -2,7 +2,6 @@
 FROM node:20-slim AS builder
 
 # Argumentos de build
-ARG NODE_ENV=production
 ARG VITE_API_URL=localhost
 
 WORKDIR /app
@@ -17,8 +16,9 @@ RUN apt-get update && apt-get install -y \
 # Copiamos archivos de dependencias Y package-lock
 COPY package*.json ./
 
-# Instalación usando package-lock.json existente (incluyendo devDependencies para el build)
-RUN npm ci --include=dev && \
+# IMPORTANTE: Instalar TODAS las dependencias (dev + prod) necesarias para el build
+# No usar NODE_ENV=production durante npm ci porque omite devDependencies
+RUN NODE_ENV=development npm ci && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
@@ -28,7 +28,7 @@ COPY . .
 RUN mv vite.config.production.ts vite.config.ts
 
 # Configurar variables de entorno para el build
-ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV=production
 ENV VITE_API_URL=$VITE_API_URL
 
 # Build de producción con vite directamente
