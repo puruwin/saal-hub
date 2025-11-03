@@ -17,14 +17,14 @@ RUN apt-get update && apt-get install -y \
 # Copiamos archivos de dependencias Y package-lock
 COPY package*.json ./
 
-# Instalación usando package-lock.json existente
-RUN npm ci && \
+# Instalación usando package-lock.json existente (incluyendo devDependencies para el build)
+RUN npm ci --include=dev && \
     npm install @rollup/rollup-linux-arm64-gnu --save-dev
 
 # Copiamos código fuente
 COPY . .
 
-# Usar config simplificado sin plugins problemáticos
+# Usar configuración de producción
 RUN mv vite.config.production.ts vite.config.ts
 
 # Configurar variables de entorno para el build
