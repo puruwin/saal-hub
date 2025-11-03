@@ -4,6 +4,9 @@ import AllergenIcon from "../components/AllergenIcon";
 import { menuService } from "../services/menuService";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import breakfastIcon from "../assets/breakfast.png";
+import lunchIcon from "../assets/lunch.png";
+import dinnerIcon from "../assets/dinner.png";
 
 interface MealItem {
     id: number;
@@ -229,10 +232,10 @@ export default function DayMenuView() {
                                 }
                             };
 
-                            const iconStyles = {
-                                breakfast: '🌅',
-                                lunch: '🍽️',
-                                dinner: '🌙'
+                            const iconImages = {
+                                breakfast: breakfastIcon,
+                                lunch: lunchIcon,
+                                dinner: dinnerIcon
                             };
 
                             return (
@@ -264,9 +267,15 @@ export default function DayMenuView() {
                                                 marginBottom: '16px'
                                             }}
                                         >
-                                            <span style={{ fontSize: '48px', marginRight: '12px' }}>
-                                                {iconStyles[mealType]}
-                                            </span>
+                                            <img 
+                                                src={iconImages[mealType]} 
+                                                alt={mealTypeLabels[mealType]}
+                                                style={{ 
+                                                    width: '80px', 
+                                                    height: '80px',
+                                                    objectFit: 'contain'
+                                                }}
+                                            />
                                         </div>
                                         <h2
                                             style={{

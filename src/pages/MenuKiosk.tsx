@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import AllergenIcon from "../components/AllergenIcon";
 import { menuService } from "../services/menuService";
+import breakfastIcon from "../assets/breakfast.png";
+import lunchIcon from "../assets/lunch.png";
+import dinnerIcon from "../assets/dinner.png";
 
 interface MealItem {
   id: number;
@@ -114,10 +117,10 @@ export default function MenuKiosk() {
                 dinner: 'bg-gradient-to-br from-blue-50 to-indigo-100 border-blue-300'
               };
               
-              const iconStyles = {
-                breakfast: '🌅',
-                lunch: '🍽️',
-                dinner: '🌙'
+              const iconImages = {
+                breakfast: breakfastIcon,
+                lunch: lunchIcon,
+                dinner: dinnerIcon
               };
               
               return (
@@ -125,7 +128,11 @@ export default function MenuKiosk() {
                   {/* Título con icono - altura fija */}
                   <div className="text-center mb-6 flex-shrink-0">
                     <div className="flex items-center justify-center mb-3">
-                      <span className="text-4xl mr-3">{iconStyles[mealType]}</span>
+                      <img 
+                        src={iconImages[mealType]} 
+                        alt={mealTypeLabels[mealType]}
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                     <h2 className="meal-title text-3xl font-bold text-gray-800 drop-shadow-sm">
                       {mealTypeLabels[mealType]}
