@@ -41,9 +41,6 @@ const mealTypeColors = {
 };
 
 export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: WeeklyMenuViewProps) {
-  const [editingItem, setEditingItem] = useState<{menuId: number, mealId: number, itemId: number} | null>(null);
-  const [editingText, setEditingText] = useState('');
-  const [loading, setLoading] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [weekOffset, setWeekOffset] = useState(0); // 0 = semana actual, -1 = semana anterior, 1 = semana siguiente
@@ -172,74 +169,6 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
     return weekMenus.find(menu => menu.date === dateStr);
   };
 
-  const handleItemEdit = (menuId: number, mealId: number, itemId: number, currentName: string) => {
-    setEditingItem({ menuId, mealId, itemId });
-    setEditingText(currentName);
-  };
-
-  const handleItemSave = async () => {
-    if (!editingItem || !editingText.trim() || loading) return;
-
-    const menu = weekMenus.find(m => m.id === editingItem.menuId);
-    if (!menu) return;
-
-    const meal = menu.meals.find(m => m.id === editingItem.mealId);
-    if (!meal) return;
-
-    const item = meal.items.find(i => i.id === editingItem.itemId);
-    if (!item) return;
-
-    setLoading(true);
-    try {
-      await menuService.updateMealItem(menu.id, meal.id, item.id, {
-        name: editingText.trim(),
-        allergens: item.allergens
-      });
-
-      const updatedMenu = {
-        ...menu,
-        meals: menu.meals.map(meal => 
-          meal.id === editingItem.mealId 
-            ? {
-                ...meal,
-                items: meal.items.map(item =>
-                  item.id === editingItem.itemId
-                    ? { ...item, name: editingText.trim() }
-                    : item
-                )
-              }
-            : meal
-        )
-      };
-
-      // Actualizar en el estado local
-      setWeekMenus(prev => prev.map(m => m.id === updatedMenu.id ? updatedMenu : m));
-      
-      // También notificar al padre
-      onMenuUpdate(updatedMenu);
-      
-      setEditingItem(null);
-      setEditingText('');
-    } catch (error) {
-      console.error('Error guardando cambios:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleItemCancel = () => {
-    setEditingItem(null);
-    setEditingText('');
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleItemSave();
-    } else if (e.key === 'Escape') {
-      handleItemCancel();
-    }
-  };
-
   const handleViewDayMenu = (date: Date) => {
     const dateStr = date.toISOString().split('T')[0];
     window.open(`/menu/${dateStr}`, '_blank');
@@ -346,7 +275,7 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
           <div className="flex justify-between items-center mb-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-900">Menú Semanal</h2>
-              <p className="text-gray-600 mt-1">Edita los platos haciendo clic en ellos</p>
+              <p className="text-gray-600 mt-1">Usa el botón "Editar Día" para modificar los menús</p>
             </div>
              <div className="flex items-center space-x-3">
                <button
@@ -460,37 +389,20 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
                             <div className="space-y-2">
                               {meal.items.map((item) => (
                                 <div key={item.id} className="flex items-center justify-between group">
-                                  {editingItem?.menuId === menu?.id && 
-                                   editingItem?.mealId === meal?.id && 
-                                   editingItem?.itemId === item.id ? (
-                                    <input
-                                      type="text"
-                                      value={editingText}
-                                      onChange={(e) => setEditingText(e.target.value)}
-                                      onKeyDown={handleKeyPress}
-                                      onBlur={handleItemSave}
-                                      className="w-full px-2 py-1 text-sm border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                      autoFocus
-                                    />
-                                  ) : (
-                                    <span 
-                                      className={`text-sm cursor-pointer hover:bg-white hover:shadow-sm px-2 py-1 rounded transition-all ${loading ? 'opacity-50' : ''}`}
-                                      onClick={() => !loading && handleItemEdit(menu?.id || 0, meal?.id || 0, item.id, item.name)}
-                                    >
-                                      {item.name}
-                                    </span>
-                                  )}
+                                  <span className="text-sm px-2 py-1">
+                                    {item.name}
+                                  </span>
                                   
                                   {item.allergens.length > 0 && (
                                     <div className="flex space-x-1">
-                                  {item.allergens.map((allergen, idx) => (
-                                    <span 
-                                      key={idx}
-                                      className="flex items-center gap-1 text-xs bg-red-100 text-red-800 px-1 py-0.5 rounded"
-                                    >
-                                      <AllergenIcon allergen={allergen} className="w-3 h-3" />
-                                    </span>
-                                  ))}
+                                      {item.allergens.map((allergen, idx) => (
+                                        <span 
+                                          key={idx}
+                                          className="flex items-center gap-1 text-xs bg-red-100 text-red-800 px-1 py-0.5 rounded"
+                                        >
+                                          <AllergenIcon allergen={allergen} className="w-3 h-3" />
+                                        </span>
+                                      ))}
                                     </div>
                                   )}
                                 </div>
