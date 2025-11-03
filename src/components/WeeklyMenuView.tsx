@@ -456,11 +456,6 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
                     return (
                       <td key={mealType} className="p-4">
                         <div className={`rounded-lg border-2 ${isWeekend ? 'border-solid border-blue-300' : 'border-dashed'} p-3 min-h-[120px] ${mealTypeColors[mealType]}`}>
-                          {isWeekend && mealType === 'breakfast' && (
-                            <div className="mb-2 text-xs text-blue-700 font-medium bg-blue-100 px-2 py-1 rounded">
-                              📅 Menú compartido Sáb/Dom
-                            </div>
-                          )}
                           {meal && meal.items.length > 0 ? (
                             <div className="space-y-2">
                               {meal.items.map((item) => (
@@ -494,7 +489,6 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
                                       className="flex items-center gap-1 text-xs bg-red-100 text-red-800 px-1 py-0.5 rounded"
                                     >
                                       <AllergenIcon allergen={allergen} className="w-3 h-3" />
-                                      {allergen}
                                     </span>
                                   ))}
                                     </div>
