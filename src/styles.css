@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Aplicar Roboto a todo el body */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Estilos personalizados para el kiosco de menú */
 .kiosk-container {
   /* Asegurar que el contenedor use toda la altura de la pantalla */

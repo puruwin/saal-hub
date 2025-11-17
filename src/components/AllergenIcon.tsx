@@ -19,21 +19,21 @@ interface AllergenIconProps {
 }
 
 const allergenIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
-  'Gluten': GlutenIcon,
-  'Lácteos': LacteosIcon,
-  'Huevos': HuevosIcon,
-  'Frutos secos': FrutosCascaraIcon,
-  'Soja': SojaIcon,
-  'Pescado': PescadoIcon,
-  'Mariscos': CrustaceosIcon,
-  'Crustáceos': CrustaceosIcon,
-  'Moluscos': MoluscosIcon,
-  'Sésamo': SesamoIcon,
-  'Mostaza': MostazaIcon,
-  'Apio': ApioIcon,
-  'Cacahuetes': CacahuetesIcon,
-  'Altramuces': AltramucesIcon,
-  'Sulfitos': SulfitosIcon,
+  'gluten': GlutenIcon,
+  'lacteos': LacteosIcon,
+  'huevos': HuevosIcon,
+  'frutos_secos': FrutosCascaraIcon,
+  'soja': SojaIcon,
+  'pescado': PescadoIcon,
+  'mariscos': CrustaceosIcon,
+  'crustaceos': CrustaceosIcon,
+  'moluscos': MoluscosIcon,
+  'sesamo': SesamoIcon,
+  'mostaza': MostazaIcon,
+  'apio': ApioIcon,
+  'cacahuetes': CacahuetesIcon,
+  'altramuces': AltramucesIcon,
+  'sulfitos': SulfitosIcon,
 };
 
 export default function AllergenIcon({ allergen, className = "w-4 h-4" }: AllergenIconProps) {
