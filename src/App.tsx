@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import MenuKiosk from "./pages/MenuKiosk";
-import DayMenuView from "./pages/DayMenuView";
+import MenuView from "./pages/MenuView";
 
 function App(): React.JSX.Element {
   return (
@@ -11,9 +10,9 @@ function App(): React.JSX.Element {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/menu" element={<MenuKiosk />} />
-        <Route path="/menu/:date" element={<DayMenuView />} />
-        <Route path="/kiosk" element={<MenuKiosk />} />
+        <Route path="/menu" element={<MenuView />} />
+        <Route path="/menu/:date" element={<MenuView />} />
+        <Route path="/kiosk" element={<MenuView />} />
       </Routes>
     </BrowserRouter>
   );
