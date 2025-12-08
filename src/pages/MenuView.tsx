@@ -235,7 +235,7 @@ export default function MenuView() {
               </div>
             </div>
             <div id="content" className="flex flex-col justify-around flex-1">
-              {currentMeal.items.map((item) => (
+              {currentMeal.items.slice().reverse().map((item) => (
                 <div key={item.id}>
                   <p className="text-2xl font-extrabold tracking-[0.10em] font-['Roboto',sans-serif]">
                     {item.name.toUpperCase()}
@@ -253,7 +253,7 @@ export default function MenuView() {
                     <p className="text-2xl font-extrabold tracking-[0.10em] font-['Roboto',sans-serif]">
                       {mealTypeLabels[meal.type].toUpperCase()}
                     </p>
-                    {meal.items.map((item) => (
+                    {meal.items.slice().reverse().map((item) => (
                       <p key={item.id} className="font-['Roboto',sans-serif]">
                         {item.name}
                       </p>

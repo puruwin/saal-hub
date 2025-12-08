@@ -387,7 +387,7 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
                         <div className={`rounded-lg border-2 ${isWeekend ? 'border-solid border-blue-300' : 'border-dashed'} p-3 min-h-[120px] ${mealTypeColors[mealType]}`}>
                           {meal && meal.items.length > 0 ? (
                             <div className="space-y-2">
-                              {meal.items.map((item) => (
+                              {meal.items.slice().reverse().map((item) => (
                                 <div key={item.id} className="flex items-center justify-between group">
                                   <span className="text-sm px-2 py-1">
                                     {item.name}

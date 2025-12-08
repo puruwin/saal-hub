@@ -86,7 +86,7 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-900">
-            {showConfirmation ? 'Confirmar Importación' : 'Importar Menú Escolar'}
+            {showConfirmation ? 'Confirmar Importación' : 'Importar Menú SKE'}
           </h2>
           <button
             onClick={handleClose}
