@@ -2,14 +2,12 @@
 import axios from "axios";
 import type { AuthResponse } from "../types/Auth";
 
-// Debug: verificar variables de entorno
-console.log('🔍 Debug VITE_API_URL:', import.meta.env.VITE_API_URL);
-console.log('🔍 Debug MODE:', import.meta.env.MODE);
-console.log('🔍 Debug DEV:', import.meta.env.DEV);
-console.log('🔍 Debug todas las env:', import.meta.env);
+// En producción usamos /api (proxy nginx), en desarrollo usamos la URL directa
+const API_URL = import.meta.env.PROD 
+  ? '/api' 
+  : `http://${import.meta.env.VITE_API_URL || 'localhost'}:3000`;
 
-const API_URL = `http://${import.meta.env.VITE_API_URL || 'localhost'}:3000`;
-console.log('🎯 API_URL final:', API_URL);
+console.log('🎯 API_URL:', API_URL, '| Mode:', import.meta.env.MODE);
 
 // Configuración base de axios
 const apiClient = axios.create({

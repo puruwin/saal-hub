@@ -1,7 +1,10 @@
 // src/services/menuService.ts
 import axios from "axios";
 
-const API_URL = `http://${import.meta.env.VITE_API_URL || 'localhost'}:3000`;
+// En producción usamos /api (proxy nginx), en desarrollo usamos la URL directa
+const API_URL = import.meta.env.PROD 
+  ? '/api' 
+  : `http://${import.meta.env.VITE_API_URL || 'localhost'}:3000`;
 
 // Configuración base de axios
 const apiClient = axios.create({
