@@ -34,11 +34,11 @@
               "items": [
                 {
                   "name": "Queso fresco",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Huevos revueltos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Aguacate",
@@ -50,7 +50,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -59,14 +59,14 @@
               "items": [
                 {
                   "name": "Ensalada mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Macarrones a la bolognesa",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
-                  "name": "Postre: Frutas de temporada",
+                  "name": "Frutas de temporada",
                   "allergens": []
                 }
               ]
@@ -76,11 +76,11 @@
               "items": [
                 {
                   "name": "Ensalada mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Pizzas variadas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -94,11 +94,11 @@
               "items": [
                 {
                   "name": "Ensaladilla",
-                  "allergens": []
+                  "allergens": ["lacteos", "huevos", "pescado", "mostaza"]
                 },
                 {
                   "name": "Albondigas en tomate",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Chuletas a la plancha",
@@ -121,7 +121,7 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Aguacate",
@@ -137,7 +137,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -146,11 +146,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Lasagna Boloñesa",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -163,11 +163,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Alitas de pollo a la barbacoa",
-                  "allergens": []
+                  "allergens": ["gluten", "sulfitos"]
                 },
                 {
                   "name": "Verduras Asadas",
@@ -185,7 +185,7 @@
               "items": [
                 {
                   "name": "Huevos Revueltos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Bacon Asado",
@@ -197,7 +197,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -206,15 +206,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Paella de secreto",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
-                  "name": "Postre: Tarta de queso",
-                  "allergens": []
+                  "name": "Tarta de queso",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -223,11 +223,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Sopa de marisco",
-                  "allergens": []
+                  "allergens": ["pescado", "moluscos", "crustaceos", "gluten"]
                 },
                 {
                   "name": "Patatas al vapor",
@@ -245,11 +245,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pancakes",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos", "lacteos"]
                 },
                 {
                   "name": "Jamón de york",
@@ -261,7 +261,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -270,15 +270,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Brócoli Gratinado",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -287,7 +287,7 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pechuga de pollo a la plancha",
@@ -295,7 +295,7 @@
                 },
                 {
                   "name": "Tortilla de patatas",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 }
               ]
             }
@@ -325,7 +325,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -334,15 +334,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Lentejas con costillas y chorizo",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
-                  "name": "Postre: Flan de huevo",
-                  "allergens": []
+                  "name": "Flan de huevo",
+                  "allergens": ["lacteos", "huevos"]
                 }
               ]
             },
@@ -351,15 +351,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Atún a la bilbaína",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Crema de calabaza",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             }
@@ -373,7 +373,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Caña de lomo",
@@ -385,7 +385,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -394,11 +394,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pollo con almendras",
-                  "allergens": []
+                  "allergens": ["lacteos", "frutos_cascara"]
                 },
                 {
                   "name": "Arroz Basmati",
@@ -411,11 +411,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Hamburguesa con bacon Asado",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -433,7 +433,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -445,7 +445,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -454,7 +454,7 @@
               "items": [
                 {
                   "name": "Ensaladilla Rusa",
-                  "allergens": []
+                  "allergens": ["lacteos", "huevos", "pescado", "mostaza"]
                 },
                 {
                   "name": "Arroz Basmati",
@@ -462,11 +462,11 @@
                 },
                 {
                   "name": "Pollo con almendras",
-                  "allergens": []
+                  "allergens": ["lacteos", "frutos_cascara"]
                 },
                 {
                   "name": "Estofado de cerdo",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             }
@@ -485,7 +485,7 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Aguacate",
@@ -493,7 +493,7 @@
                 },
                 {
                   "name": "Queso Mozarella",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate y albahaca",
@@ -501,7 +501,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -510,11 +510,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Espaguetis Carbonara",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -527,7 +527,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Chuletas de pavo al ajillo",
@@ -549,11 +549,11 @@
               "items": [
                 {
                   "name": "Tortilla Rellena",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Queso Brie",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate Rallado",
@@ -561,7 +561,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -570,15 +570,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Arroz Caldoso de marisco",
-                  "allergens": []
+                  "allergens": ["pescado", "moluscos", "crustaceos"]
                 },
                 {
-                  "name": "Postre: Coulant de chocolate Caliente",
-                  "allergens": []
+                  "name": "Coulant de chocolate Caliente",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -587,11 +587,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Sopa de picadillo",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos"]
                 },
                 {
                   "name": "Berenjenas Rellenas",
@@ -609,11 +609,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Bizcocho de zanahoria",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Salchichón",
@@ -625,7 +625,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -634,11 +634,11 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Pisto Manchego",
@@ -651,15 +651,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tortilla de espárragos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Albóndigas con tomate",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             }
@@ -689,7 +689,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -698,15 +698,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Cocido Madrileño",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
-                  "name": "Postre: Natillas",
-                  "allergens": []
+                  "name": "Natillas",
+                  "allergens": ["lacteos", "huevos"]
                 }
               ]
             },
@@ -715,11 +715,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pez Espada al limón",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Guisantes Salteados",
@@ -737,7 +737,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Lacon Ahumado",
@@ -749,7 +749,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -758,11 +758,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Solomiello al whisky",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
                   "name": "Patatas Gajo Asadas",
@@ -775,11 +775,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pizzas Variadas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -793,7 +793,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -805,7 +805,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -818,11 +818,11 @@
                 },
                 {
                   "name": "Crema de verduras",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Solomiello al whisky",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
                   "name": "Carne con tomate",
@@ -845,7 +845,7 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Aguacate",
@@ -861,7 +861,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -870,11 +870,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Macarrones a la bolognesa",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -887,7 +887,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Jamoncitos de pollo Asados",
@@ -909,7 +909,7 @@
               "items": [
                 {
                   "name": "Huevos Fritos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Bacon Asado",
@@ -921,7 +921,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -930,15 +930,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Risotto de setas",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
-                  "name": "Postre: Tiramiesú",
-                  "allergens": []
+                  "name": "Tiramiesú",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -947,15 +947,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Crema de calabacín",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Empanada de atún",
-                  "allergens": []
+                  "allergens": ["gluten", "pescado"]
                 }
               ]
             }
@@ -969,11 +969,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Crepes",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos", "lacteos"]
                 },
                 {
                   "name": "Jamón de york",
@@ -985,7 +985,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -994,15 +994,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Berenjenas a la parmesana",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -1011,15 +1011,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Rollitos de primavera",
-                  "allergens": []
+                  "allergens": ["gluten", "soja"]
                 },
                 {
                   "name": "Arroz Tres Delicias",
-                  "allergens": []
+                  "allergens": ["huevos", "soja"]
                 }
               ]
             }
@@ -1049,7 +1049,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1058,15 +1058,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Marmietako",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
-                  "name": "Postre: Arroz con leche",
-                  "allergens": []
+                  "name": "Arroz con leche",
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -1075,11 +1075,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Costillas Barbacoa",
-                  "allergens": []
+                  "allergens": ["gluten", "sulfitos"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -1097,7 +1097,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Caña de lomo",
@@ -1109,7 +1109,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1118,7 +1118,7 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pollo Asado",
@@ -1135,11 +1135,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Cena Mexicana",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -1153,7 +1153,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -1165,7 +1165,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1174,11 +1174,11 @@
               "items": [
                 {
                   "name": "Ensalada de pasta",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos"]
                 },
                 {
                   "name": "Macarrones con tomate",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Pollo Asado",
@@ -1186,7 +1186,7 @@
                 },
                 {
                   "name": "Carne en salsa",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             }
@@ -1205,11 +1205,11 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Mozarella",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate y albahaca",
@@ -1225,7 +1225,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1234,11 +1234,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Lasagna de atún y espinacas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -1251,7 +1251,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Chuletas de cerdo a la plancha",
@@ -1273,11 +1273,11 @@
               "items": [
                 {
                   "name": "Huevos Cocidos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Queso Brie",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate Rallado",
@@ -1285,7 +1285,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1294,15 +1294,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Potage Garbanzos con bacalao",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado", "gluten"]
                 },
                 {
-                  "name": "Postre: Brownie",
-                  "allergens": []
+                  "name": "Brownie",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -1311,11 +1311,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Croquetas de jamón",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Crema de zanahoria",
@@ -1333,11 +1333,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Bizcocho de limón",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Salchichón",
@@ -1349,7 +1349,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1358,15 +1358,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Espinacas a la crema",
-                  "allergens": []
+                  "allergens": ["lacteos", "gluten"]
                 }
               ]
             },
@@ -1375,7 +1375,7 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Butifarra Asada",
@@ -1413,7 +1413,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1422,15 +1422,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Arroz a la cubana",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
-                  "name": "Postre: Tarta de manzana",
-                  "allergens": []
+                  "name": "Tarta de manzana",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -1439,11 +1439,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Merluza Rebozada",
-                  "allergens": []
+                  "allergens": ["pescado", "gluten", "huevos"]
                 },
                 {
                   "name": "Patatas al vapor",
@@ -1461,7 +1461,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Lacón Ahumado",
@@ -1473,7 +1473,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1482,7 +1482,7 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Carrillera de cerdo",
@@ -1490,7 +1490,7 @@
                 },
                 {
                   "name": "Puré Parmentier",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -1499,11 +1499,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Perritos",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -1521,7 +1521,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -1533,7 +1533,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1542,11 +1542,11 @@
               "items": [
                 {
                   "name": "Sopa de picadillo",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos"]
                 },
                 {
                   "name": "Raviolis a la carbonara",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Carrillera de cerdo",
@@ -1573,7 +1573,7 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Aguacate",
@@ -1589,7 +1589,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1598,11 +1598,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Lasagna Boloñesa",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -1615,11 +1615,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Alitas de pollo a la barbacoa",
-                  "allergens": []
+                  "allergens": ["gluten", "sulfitos"]
                 },
                 {
                   "name": "Verduras Asadas",
@@ -1637,7 +1637,7 @@
               "items": [
                 {
                   "name": "Huevos Revueltos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Bacon Asado",
@@ -1649,7 +1649,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1658,15 +1658,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["pescado", "huevos"]
                 },
                 {
                   "name": "Paella de secreto",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
-                  "name": "Postre: Tarta de queso",
-                  "allergens": []
+                  "name": "Tarta de queso",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -1675,11 +1675,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Sopa de marisco",
-                  "allergens": []
+                  "allergens": ["pescado", "moluscos", "crustaceos", "gluten"]
                 },
                 {
                   "name": "Patatas al vapor",
@@ -1697,11 +1697,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pancakes",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos", "lacteos"]
                 },
                 {
                   "name": "Jamón de york",
@@ -1713,7 +1713,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1722,15 +1722,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Brócoli Gratinado",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -1739,7 +1739,7 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pechuga de pollo a la plancha",
@@ -1747,7 +1747,7 @@
                 },
                 {
                   "name": "Tortilla de patatas",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 }
               ]
             }
@@ -1777,7 +1777,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1786,15 +1786,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Lentejas con costillas y chorizo",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
-                  "name": "Postre: Flan de huevo",
-                  "allergens": []
+                  "name": "Flan de huevo",
+                  "allergens": ["lacteos", "huevos"]
                 }
               ]
             },
@@ -1803,15 +1803,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Atún a la bilbaína",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Crema de calabaza",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             }
@@ -1825,7 +1825,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Caña de lomo",
@@ -1837,7 +1837,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1846,11 +1846,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pollo con almendras",
-                  "allergens": []
+                  "allergens": ["lacteos", "frutos_cascara"]
                 },
                 {
                   "name": "Arroz Basmati",
@@ -1863,11 +1863,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Hamburguesa con bacon Asado",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -1885,7 +1885,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -1897,7 +1897,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -1906,7 +1906,7 @@
               "items": [
                 {
                   "name": "Ensaladilla Rusa",
-                  "allergens": []
+                  "allergens": ["lacteos", "huevos", "pescado", "mostaza"]
                 },
                 {
                   "name": "Arroz Basmati",
@@ -1914,11 +1914,11 @@
                 },
                 {
                   "name": "Pollo con almendras",
-                  "allergens": []
+                  "allergens": ["lacteos", "frutos_cascara"]
                 },
                 {
                   "name": "Estofado de cerdo",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             }
@@ -1937,11 +1937,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Espaguetis Carbonara",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -1954,7 +1954,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Chuletas de pavo al ajillo",
@@ -1976,15 +1976,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Arroz Caldoso de marisco",
-                  "allergens": []
+                  "allergens": ["pescado", "moluscos", "crustaceos"]
                 },
                 {
-                  "name": "Postre: Coulant de chocolate Caliente",
-                  "allergens": []
+                  "name": "Coulant de chocolate Caliente",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -1993,11 +1993,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Sopa de picadillo",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos"]
                 },
                 {
                   "name": "Berenjenas Rellenas",
@@ -2015,11 +2015,11 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Pisto Manchego",
@@ -2032,15 +2032,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tortilla de espárragos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Albóndigas con tomate",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             }
@@ -2054,15 +2054,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Cocido Madrileño",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
-                  "name": "Postre: Natillas",
-                  "allergens": []
+                  "name": "Natillas",
+                  "allergens": ["lacteos", "huevos"]
                 }
               ]
             },
@@ -2071,11 +2071,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pez Espada al limón",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Guisantes Salteados",
@@ -2093,11 +2093,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Solomiello al whisky",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
                   "name": "Patatas Gajo Asadas",
@@ -2110,11 +2110,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pizzas Variadas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -2132,11 +2132,11 @@
                 },
                 {
                   "name": "Crema de verduras",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Solomiello al whisky",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 },
                 {
                   "name": "Carne con tomate",
@@ -2159,7 +2159,7 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Aguacate",
@@ -2175,7 +2175,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2184,11 +2184,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Macarrones a la bolognesa",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -2201,7 +2201,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Jamoncitos de pollo Asados",
@@ -2223,7 +2223,7 @@
               "items": [
                 {
                   "name": "Huevos Fritos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Bacon Asado",
@@ -2235,7 +2235,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2244,15 +2244,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Risotto de setas",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
-                  "name": "Postre: Tiramiesú",
-                  "allergens": []
+                  "name": "Tiramiesú",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -2261,15 +2261,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Crema de calabacín",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Empanada de atún",
-                  "allergens": []
+                  "allergens": ["gluten", "pescado"]
                 }
               ]
             }
@@ -2283,11 +2283,11 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Crepes",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos", "lacteos"]
                 },
                 {
                   "name": "Jamón de york",
@@ -2299,7 +2299,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2308,15 +2308,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Berenjenas a la parmesana",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -2325,15 +2325,15 @@
               "items": [
                 {
                   "name": "Ensalada de escarola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Rollitos de primavera",
-                  "allergens": []
+                  "allergens": ["gluten", "soja"]
                 },
                 {
                   "name": "Arroz Tres Delicias",
-                  "allergens": []
+                  "allergens": ["huevos", "soja"]
                 }
               ]
             }
@@ -2363,7 +2363,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2372,15 +2372,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Marmietako",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
-                  "name": "Postre: Arroz con leche",
-                  "allergens": []
+                  "name": "Arroz con leche",
+                  "allergens": ["lacteos"]
                 }
               ]
             },
@@ -2389,11 +2389,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Costillas Barbacoa",
-                  "allergens": []
+                  "allergens": ["gluten", "sulfitos"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -2411,7 +2411,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Caña de lomo",
@@ -2423,7 +2423,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2432,7 +2432,7 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Pollo Asado",
@@ -2449,11 +2449,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": []
+                  "allergens": ["lacteos", "pescado"]
                 },
                 {
                   "name": "Cena Mexicana",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -2467,7 +2467,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -2479,7 +2479,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2488,11 +2488,11 @@
               "items": [
                 {
                   "name": "Ensalada de pasta",
-                  "allergens": []
+                  "allergens": ["gluten", "huevos"]
                 },
                 {
                   "name": "Macarrones con tomate",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Pollo Asado",
@@ -2500,7 +2500,7 @@
                 },
                 {
                   "name": "Carne en salsa",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             }
@@ -2518,31 +2518,15 @@
               "type": "breakfast",
               "items": [
                 {
-                  "name": "Desayuno",
-                  "allergens": []
-                },
-                {
                   "name": "Yogur y granola",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Bizcocho de limón",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Salchichón",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
                   "allergens": []
                 },
                 {
@@ -2550,12 +2534,8 @@
                   "allergens": []
                 },
                 {
-                  "name": "Desayuno",
-                  "allergens": []
-                },
-                {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2563,28 +2543,16 @@
               "type": "lunch",
               "items": [
                 {
-                  "name": "Comieda",
-                  "allergens": []
-                },
-                {
                   "name": "Ensalada de escarola",
-                  "allergens": []
-                },
-                {
-                  "name": "Comieda",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
-                },
-                {
-                  "name": "Comieda",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
                 {
                   "name": "Espinacas a la crema",
-                  "allergens": []
+                  "allergens": ["lacteos", "gluten"]
                 }
               ]
             },
@@ -2592,23 +2560,11 @@
               "type": "dinner",
               "items": [
                 {
-                  "name": "Cena",
-                  "allergens": []
-                },
-                {
                   "name": "Ensalada de escarola",
-                  "allergens": []
-                },
-                {
-                  "name": "Cena",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Butifarra Asada",
-                  "allergens": []
-                },
-                {
-                  "name": "Cena",
                   "allergens": []
                 },
                 {
@@ -2627,11 +2583,11 @@
               "items": [
                 {
                   "name": "Porridge",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Queso Mozarella",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate y albahaca",
@@ -2643,7 +2599,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2652,11 +2608,11 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Lasagna de atún y espinacas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -2669,7 +2625,7 @@
               "items": [
                 {
                   "name": "Ensalada César",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "pescado"]
                 },
                 {
                   "name": "Chuletas de cerdo a la plancha",
@@ -2691,11 +2647,11 @@
               "items": [
                 {
                   "name": "Huevos Cocidos",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
                   "name": "Queso Brie",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Tomate Rallado",
@@ -2703,7 +2659,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2712,15 +2668,15 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Potage Garbanzos con bacalo",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado", "gluten"]
                 },
                 {
-                  "name": "Postre: Brownie",
-                  "allergens": []
+                  "name": "Brownie",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -2729,11 +2685,11 @@
               "items": [
                 {
                   "name": "Ensalada Mixta",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Croquetas de jamón",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Crema de zanahoria",
@@ -2750,31 +2706,15 @@
               "type": "breakfast",
               "items": [
                 {
-                  "name": "Desayuno",
-                  "allergens": []
-                },
-                {
                   "name": "Yogur y granola",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Bizcocho de limón",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 },
                 {
                   "name": "Salchichón",
-                  "allergens": []
-                },
-                {
-                  "name": "Desayuno",
                   "allergens": []
                 },
                 {
@@ -2782,12 +2722,8 @@
                   "allergens": []
                 },
                 {
-                  "name": "Desayuno",
-                  "allergens": []
-                },
-                {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2795,28 +2731,16 @@
               "type": "lunch",
               "items": [
                 {
-                  "name": "Comieda",
-                  "allergens": []
-                },
-                {
                   "name": "Ensalada de escarola",
-                  "allergens": []
-                },
-                {
-                  "name": "Comieda",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pescado del día al horno",
-                  "allergens": []
+                  "allergens": ["pescado"]
                 },
-                {
-                  "name": "Comieda",
-                  "allergens": []
-                },
-                {
+                { 
                   "name": "Espinacas a la crema",
-                  "allergens": []
+                  "allergens": ["lacteos", "gluten"]
                 }
               ]
             },
@@ -2824,23 +2748,11 @@
               "type": "dinner",
               "items": [
                 {
-                  "name": "Cena",
-                  "allergens": []
-                },
-                {
                   "name": "Ensalada de escarola",
-                  "allergens": []
-                },
-                {
-                  "name": "Cena",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Butifarra Asada",
-                  "allergens": []
-                },
-                {
-                  "name": "Cena",
                   "allergens": []
                 },
                 {
@@ -2875,7 +2787,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2884,15 +2796,15 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Arroz a la cubana",
-                  "allergens": []
+                  "allergens": ["huevos"]
                 },
                 {
-                  "name": "Postre: Tarta de manzana",
-                  "allergens": []
+                  "name": "Tarta de manzana",
+                  "allergens": ["gluten", "lacteos", "huevos"]
                 }
               ]
             },
@@ -2901,11 +2813,11 @@
               "items": [
                 {
                   "name": "Ensalada Griega",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Merluza Rebozada",
-                  "allergens": []
+                  "allergens": ["pescado", "gluten", "huevos"]
                 },
                 {
                   "name": "Patatas al vapor",
@@ -2923,7 +2835,7 @@
               "items": [
                 {
                   "name": "Yogur y granola",
-                  "allergens": []
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Lacón Ahumado",
@@ -2935,7 +2847,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
@@ -2948,7 +2860,7 @@
                 },
                 {
                   "name": "Postre Especial y vino",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             },
@@ -2957,11 +2869,11 @@
               "items": [
                 {
                   "name": "Ensalada Completa",
-                  "allergens": []
+                  "allergens": ["huevos", "pescado"]
                 },
                 {
                   "name": "Hamburguesas",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 },
                 {
                   "name": "Patatas Fritas",
@@ -2979,7 +2891,7 @@
               "items": [
                 {
                   "name": "Donuts Original",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Embutido",
@@ -2991,7 +2903,7 @@
                 },
                 {
                   "name": "Pan",
-                  "allergens": []
+                  "allergens": ["gluten"]
                 }
               ]
             },
