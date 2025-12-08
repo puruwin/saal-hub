@@ -4,7 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', '')
+  // Cargar variables desde archivos .env
+  const envFile = loadEnv(mode, '.', '')
+  
+  // En producción, priorizar: process.env (Docker) > archivo .env > fallback
+  // IMPORTANTE: process.env funciona durante el build de Vite
+  const apiUrl = process.env.VITE_API_URL || envFile.VITE_API_URL || 'localhost'
+  
+  console.log('📦 Build VITE_API_URL:', apiUrl)
+  console.log('📦 Fuente: process.env =', process.env.VITE_API_URL, '| envFile =', envFile.VITE_API_URL)
   
   return {
     plugins: [
@@ -17,9 +25,8 @@ export default defineConfig(({ mode }) => {
       })
     ],
     define: {
-      'import.meta.env.VITE_API_URL': JSON.stringify(
-        mode === 'development' ? 'localhost' : env.VITE_API_URL || 'http://localhost:3000'
-      ),
+      // Solo pasamos el hostname/IP, auth.ts y menuService.ts construyen la URL completa
+      'import.meta.env.VITE_API_URL': JSON.stringify(apiUrl),
     },
     build: {
       outDir: 'dist',
