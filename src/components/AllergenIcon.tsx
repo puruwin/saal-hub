@@ -1,7 +1,7 @@
 import GlutenIcon from '../assets/gluten.svg?react';
 import LacteosIcon from '../assets/lacteos.svg?react';
 import HuevosIcon from '../assets/huevos.svg?react';
-import FrutosCascaraIcon from '../assets/frutos-cascara.svg?react';
+import FrutosCascaraIcon from '../assets/frutos_cascara.svg?react';
 import SojaIcon from '../assets/soja.svg?react';
 import PescadoIcon from '../assets/pescado.svg?react';
 import CrustaceosIcon from '../assets/crustaceos.svg?react';
@@ -22,7 +22,7 @@ const allergenIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
   'gluten': GlutenIcon,
   'lacteos': LacteosIcon,
   'huevos': HuevosIcon,
-  'frutos_secos': FrutosCascaraIcon,
+  'frutos_cascara': FrutosCascaraIcon,
   'soja': SojaIcon,
   'pescado': PescadoIcon,
   'mariscos': CrustaceosIcon,

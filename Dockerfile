@@ -18,8 +18,7 @@ COPY package*.json ./
 
 # IMPORTANTE: Instalar TODAS las dependencias (dev + prod) necesarias para el build
 # No usar NODE_ENV=production durante npm ci porque omite devDependencies
-RUN NODE_ENV=development npm ci && \
-    npm install @rollup/rollup-linux-arm64-gnu --save-dev
+RUN NODE_ENV=development npm ci
 
 # Copiamos código fuente
 COPY . .
