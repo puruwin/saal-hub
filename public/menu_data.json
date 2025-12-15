@@ -1966,7 +1966,7 @@
                 },
                 {
                   "name": "Espaguetis Carbonara",
-                  "allergens": ["gluten", "lacteos", "huevos"]
+                  "allergens": ["gluten", "lacteos"]
                 },
                 {
                   "name": "Macedonia de frutas",
@@ -1983,7 +1983,7 @@
                 },
                 {
                   "name": "Chuletas de pavo al ajillo",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos", "soja"]
                 },
                 {
                   "name": "Verduras Asadas",
@@ -2001,7 +2001,7 @@
               "items": [
                 {
                   "name": "Tortilla Rellena",
-                  "allergens": ["huevos"]
+                  "allergens": ["huevos", "lacteos"]
                 },
                 {
                   "name": "Queso Brie",
@@ -2026,7 +2026,7 @@
                 },
                 {
                   "name": "Arroz Caldoso de marisco",
-                  "allergens": ["pescado", "moluscos", "crustaceos"]
+                  "allergens": ["pescado", "moluscos", "crustaceos", "sulfitos"]
                 },
                 {
                   "name": "Coulant de chocolate Caliente",
@@ -2047,7 +2047,7 @@
                 },
                 {
                   "name": "Berenjenas Rellenas",
-                  "allergens": []
+                  "allergens": ["gluten", "lacteos"]
                 }
               ]
             }
@@ -2072,7 +2072,7 @@
                   "allergens": []
                 },
                 {
-                  "name": "Tomate Laminado",
+                  "name": "Tomate rallado",
                   "allergens": []
                 },
                 {
@@ -2111,7 +2111,7 @@
                 },
                 {
                   "name": "Albóndigas con tomate",
-                  "allergens": ["gluten"]
+                  "allergens": ["gluten", "huevos"]
                 }
               ]
             }
@@ -2214,11 +2214,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": ["lacteos", "pescado"]
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Solomillo al whisky",
-                  "allergens": ["sulfitos"]
+                  "allergens": ["lacteos","sulfitos"]
                 },
                 {
                   "name": "Patatas Gajo Asadas",
@@ -2231,11 +2231,11 @@
               "items": [
                 {
                   "name": "Ensalada de canónigos",
-                  "allergens": ["lacteos", "pescado"]
+                  "allergens": ["lacteos"]
                 },
                 {
                   "name": "Pizzas Variadas",
-                  "allergens": ["gluten", "lacteos"]
+                  "allergens": ["gluten", "lacteos", "soja", "pescado", "mostaza"]
                 }
               ]
             }
@@ -2248,8 +2248,8 @@
               "type": "breakfast",
               "items": [
                 {
-                  "name": "Donuts Original",
-                  "allergens": ["gluten", "lacteos"]
+                  "name": "Crepes",
+                  "allergens": ["gluten", "lacteos", "huevos", "soja", "mostaza", "apio"]
                 },
                 {
                   "name": "Embutido",
@@ -2270,7 +2270,7 @@
               "items": [
                 {
                   "name": "Ensalada de arroz",
-                  "allergens": []
+                  "allergens": ["pescado", "huevos"]
                 },
                 {
                   "name": "Crema de verduras",
@@ -2278,11 +2278,11 @@
                 },
                 {
                   "name": "Solomillo al whisky",
-                  "allergens": ["sulfitos"]
+                  "allergens": ["lacteos", "sulfitos"]
                 },
                 {
                   "name": "Carne con tomate",
-                  "allergens": []
+                  "allergens": ["sulfitos"]
                 }
               ]
             }
