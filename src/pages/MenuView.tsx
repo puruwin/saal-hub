@@ -145,15 +145,15 @@ export default function MenuView() {
     const minute = currentTime.getMinutes();
     const totalMinutes = hour * 60 + minute;
 
-    // 00:00 - 11:59: Desayuno
-    if (totalMinutes >= 0 && totalMinutes < 720) {
+    // 00:00 - 09:00: Desayuno
+    if (totalMinutes >= 0 && totalMinutes < 540) {
       return 'breakfast';
     }
-    // 12:00 - 16:29: Comida
-    if (totalMinutes >= 720 && totalMinutes < 990) {
+    // 09:00 - 14:30: Comida
+    if (totalMinutes >= 540 && totalMinutes < 870) {
       return 'lunch';
     }
-    // 16:30 - 23:59: Cena
+    // 14:30 - 23:59: Cena
     return 'dinner';
   };
 
