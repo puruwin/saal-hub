@@ -1,21 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import menuTemplateService, { MenuTemplateListItem } from "../services/menuTemplateService";
 
 interface BulkImportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (startDate: string) => Promise<{ count: number; skipped?: number; errors?: number; templatesCreated?: number; templatesUpdated?: number } | undefined>;
+  onConfirm: (startDate: string, templateId: number) => Promise<{ count: number; skipped?: number; errors?: number; templateName?: string } | undefined>;
 }
 
 const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) => {
   const [startDate, setStartDate] = useState('');
+  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(null);
+  const [templates, setTemplates] = useState<MenuTemplateListItem[]>([]);
+  const [loadingTemplates, setLoadingTemplates] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState('');
 
-  // Verificar si una fecha es lunes
-  const isMonday = (dateString: string): boolean => {
+  // Cargar plantillas disponibles
+  useEffect(() => {
+    if (isOpen) {
+      loadTemplates();
+    }
+  }, [isOpen]);
+
+  const loadTemplates = async () => {
+    setLoadingTemplates(true);
+    try {
+      const data = await menuTemplateService.getTemplates();
+      setTemplates(data);
+      if (data.length > 0 && !selectedTemplateId) {
+        setSelectedTemplateId(data[0].id);
+      }
+    } catch (err) {
+      console.error('Error cargando plantillas:', err);
+      setError('No se pudieron cargar las plantillas. Ve a /templates para importar una.');
+    } finally {
+      setLoadingTemplates(false);
+    }
+  };
+
+  // Verificar si una fecha es jueves (las escuelas empiezan en jueves)
+  const isThursday = (dateString: string): boolean => {
     const date = new Date(dateString + 'T00:00:00');
-    return date.getDay() === 1;
+    return date.getDay() === 4;
   };
 
   // Formatear fecha a dd/mm/yyyy
@@ -39,8 +66,12 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
       setError('Por favor selecciona una fecha');
       return;
     }
-    if (!isMonday(startDate)) {
-      setError('La fecha seleccionada debe ser un LUNES. Por favor elige un lunes.');
+    if (!selectedTemplateId) {
+      setError('Por favor selecciona una plantilla');
+      return;
+    }
+    if (!isThursday(startDate)) {
+      setError('La fecha seleccionada debe ser un JUEVES (las escuelas empiezan en jueves).');
       return;
     }
     setError('');
@@ -48,15 +79,14 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
   };
 
   const handleConfirm = async () => {
+    if (!selectedTemplateId) return;
+    
     setLoading(true);
     setError('');
     try {
-      const result = await onConfirm(startDate);
-      const templatesInfo = (result?.templatesCreated || result?.templatesUpdated) 
-        ? `\n\n🍽️ Plantillas de Platos:\n- Nuevas plantillas creadas: ${result?.templatesCreated || 0}\n- Plantillas actualizadas: ${result?.templatesUpdated || 0}\n\n💡 Ahora puedes usar el autocompletado para agregar estos platos rápidamente.`
-        : '';
+      const result = await onConfirm(startDate, selectedTemplateId);
       
-      alert(`✅ Importación completada!\n\n📊 Resumen:\n- Menús creados: ${result?.count || 0}\n- Menús omitidos: ${result?.skipped || 0}\n- Errores: ${result?.errors || 0}${templatesInfo}\n\nLos menús se han actualizado automáticamente.`);
+      alert(`✅ Importación completada!\n\n📊 Resumen:\n- Plantilla: ${result?.templateName || 'Desconocida'}\n- Menús creados: ${result?.count || 0}\n- Menús omitidos: ${result?.skipped || 0}\n- Errores: ${result?.errors || 0}\n\nLos menús se han actualizado automáticamente.`);
       handleClose();
     } catch (err: any) {
       const details = err.response?.data?.details || err.message || 'Error desconocido';
@@ -79,14 +109,16 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
     setError('');
   };
 
+  const selectedTemplate = templates.find(t => t.id === selectedTemplateId);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 relative">
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-900">
-            {showConfirmation ? 'Confirmar Importación' : 'Importar Menú SKE'}
+            {showConfirmation ? 'Confirmar Importación' : 'Importar Menú desde Plantilla'}
           </h2>
           <button
             onClick={handleClose}
@@ -101,11 +133,55 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
         </div>
 
         <div className="p-6">
-          {!showConfirmation ? (
+          {loadingTemplates ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+            </div>
+          ) : templates.length === 0 ? (
+            <div className="text-center py-8">
+              <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              <h3 className="text-lg font-semibold text-gray-600 mb-2">No hay plantillas</h3>
+              <p className="text-gray-500 mb-4">Primero debes importar una plantilla de menú.</p>
+              <a
+                href="/templates"
+                className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Ir a Editor de Plantillas
+              </a>
+            </div>
+          ) : !showConfirmation ? (
             <form onSubmit={handleInitialSubmit}>
+              {/* Selector de plantilla */}
+              <div className="mb-6">
+                <label htmlFor="template" className="block text-sm font-medium text-gray-700 mb-2">
+                  Plantilla de menú
+                </label>
+                <select
+                  id="template"
+                  value={selectedTemplateId || ''}
+                  onChange={(e) => setSelectedTemplateId(Number(e.target.value))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                >
+                  {templates.map(template => (
+                    <option key={template.id} value={template.id}>
+                      {template.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-1 text-xs text-gray-500">
+                  <a href="/templates" className="text-blue-600 hover:underline">
+                    Editar plantillas
+                  </a>
+                </p>
+              </div>
+
+              {/* Selector de fecha */}
               <div className="mb-6">
                 <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-2">
-                  Selecciona el primer lunes de la escuela
+                  Primer jueves de la escuela
                 </label>
                 <input
                   type="date"
@@ -117,32 +193,32 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
                 />
                 {startDate && (
                   <div className="mt-2">
-                    {isMonday(startDate) ? (
+                    {isThursday(startDate) ? (
                       <p className="text-sm font-medium text-green-700">
                         ✅ {getDayName(startDate)} - {formatDateES(startDate)} (Correcto)
                       </p>
                     ) : (
                       <p className="text-sm font-medium text-red-700">
-                        ❌ {getDayName(startDate)} - {formatDateES(startDate)} (Debe ser lunes)
+                        ❌ {getDayName(startDate)} - {formatDateES(startDate)} (Debe ser jueves)
                       </p>
                     )}
                   </div>
                 )}
                 <p className="mt-2 text-sm text-gray-500">
-                  ⚠️ Importante: Debes seleccionar un <strong>LUNES</strong>. Los menús se importarán desde este día.
+                  ⚠️ Importante: Las escuelas empiezan en <strong>JUEVES</strong>.
                 </p>
               </div>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-yellow-700">
-                      Se importarán <strong>9 semanas</strong> de menús desde el archivo de datos.
+                    <p className="text-sm text-blue-700">
+                      Los menús se crearán usando los platos y alérgenos de la plantilla seleccionada.
                     </p>
                   </div>
                 </div>
@@ -150,7 +226,7 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
 
               {error && (
                 <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
-                  <p className="text-sm text-red-700">{error}</p>
+                  <p className="text-sm text-red-700 whitespace-pre-line">{error}</p>
                 </div>
               )}
 
@@ -176,23 +252,23 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
                   <h3 className="font-semibold text-blue-900 mb-2">Detalles de la importación:</h3>
                   <ul className="text-sm text-blue-800 space-y-1">
+                    <li>• Plantilla: <strong>{selectedTemplate?.name}</strong></li>
                     <li>• Fecha de inicio: <strong>{getDayName(startDate)} {formatDateES(startDate)}</strong></li>
-                    <li>• Semanas a importar: <strong>9 semanas</strong></li>
-                    <li>• Menús totales: <strong>Aproximadamente 63 días</strong></li>
+                    <li>• Semanas: <strong>9 semanas</strong></li>
                   </ul>
                 </div>
 
-                <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
                   <div className="flex">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium text-red-800">¿Estás seguro?</h3>
-                      <p className="mt-1 text-sm text-red-700">
-                        Esta acción creará una gran cantidad de menús en la base de datos. Los menús que ya existan para las fechas correspondientes serán omitidos.
+                      <h3 className="text-sm font-medium text-yellow-800">¿Estás seguro?</h3>
+                      <p className="mt-1 text-sm text-yellow-700">
+                        Los menús que ya existan para las fechas correspondientes serán omitidos.
                       </p>
                     </div>
                   </div>
@@ -200,7 +276,7 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
 
                 {error && (
                   <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
-                    <p className="text-sm text-red-700">{error}</p>
+                    <p className="text-sm text-red-700 whitespace-pre-line">{error}</p>
                   </div>
                 )}
               </div>
@@ -218,7 +294,7 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
                   type="button"
                   onClick={handleConfirm}
                   disabled={loading}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 flex items-center"
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 flex items-center"
                 >
                   {loading ? (
                     <>
@@ -242,4 +318,3 @@ const BulkImportModal = ({ isOpen, onClose, onConfirm }: BulkImportModalProps) =
 };
 
 export default BulkImportModal;
-

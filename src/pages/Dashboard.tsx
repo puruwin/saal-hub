@@ -183,6 +183,12 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               <a
+                href="/templates"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded text-sm font-medium"
+              >
+                Plantillas de Menú
+              </a>
+              <a
                 href="/menu"
                 target="_blank"
                 rel="noopener noreferrer"

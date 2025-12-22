@@ -195,13 +195,10 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
     }
   };
 
-  const handleBulkImport = async (startDate: string) => {
+  const handleBulkImport = async (startDate: string, templateId: number) => {
     try {
-      // Importar los datos del JSON
-      const response = await fetch('/menu_data.json');
-      const menuData = await response.json();
-      
-      const result = await menuService.bulkImportMenus(startDate, menuData);
+      // Importar desde la plantilla almacenada en BD
+      const result = await menuService.bulkImportMenus(startDate, templateId);
       
       // Recargar los menús de la semana actual después de la importación
       await reloadWeekMenus();

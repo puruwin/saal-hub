@@ -194,6 +194,17 @@ export const menuService = {
     }
   },
 
+  // Reordenar items de una comida
+  async reorderMealItems(menuId: number, mealId: number, itemIds: number[]): Promise<any> {
+    try {
+      const response = await apiClient.put(`/menus/${menuId}/meals/${mealId}/items/reorder`, { itemIds });
+      return response.data;
+    } catch (error) {
+      console.error('Error reordenando items:', error);
+      throw error;
+    }
+  },
+
   // Agregar comida completa a un menú
   async addMeal(menuId: number, meal: { type: string; items: { name: string; allergens: string[] }[] }): Promise<any> {
     try {
@@ -215,12 +226,12 @@ export const menuService = {
     }
   },
 
-  // Importación masiva de menús escolares
-  async bulkImportMenus(startDate: string, menuData: any): Promise<{ message: string; count: number; skipped: number; errors: number; templatesCreated: number; templatesUpdated: number }> {
+  // Importación masiva de menús escolares desde plantilla
+  async bulkImportMenus(startDate: string, templateId: number): Promise<{ message: string; templateName: string; count: number; skipped: number; errors: number }> {
     try {
       const response = await apiClient.post('/menus/bulk-import', {
         startDate,
-        menuData
+        templateId
       });
       return response.data;
     } catch (error) {
@@ -259,6 +270,22 @@ export const menuService = {
       return response.data;
     } catch (error) {
       console.error('Error buscando plantillas:', error);
+      return [];
+    }
+  },
+
+  // Buscar platos en la base de datos (para autocompletado inline)
+  async searchDishes(query: string): Promise<{ id: number; name: string; allergens: string[]; usageCount: number }[]> {
+    try {
+      if (!query || query.trim().length < 2) {
+        return [];
+      }
+      const response = await apiClient.get('/dishes/search', {
+        params: { query }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error buscando platos:', error);
       return [];
     }
   },

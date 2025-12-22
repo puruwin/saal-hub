@@ -53,6 +53,22 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
   const [suggestions, setSuggestions] = useState<{ id: number; name: string; allergens: string[]; usageCount: number }[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  
+  // Estado para edición inline de nombre
+  const [inlineEditingItemId, setInlineEditingItemId] = useState<number | null>(null);
+  const [inlineEditingName, setInlineEditingName] = useState('');
+  const [inlineSuggestions, setInlineSuggestions] = useState<{ id: number; name: string; allergens: string[] }[]>([]);
+  const [showInlineSuggestions, setShowInlineSuggestions] = useState(false);
+  const [selectedInlineSuggestionIndex, setSelectedInlineSuggestionIndex] = useState(-1);
+  const [inlineEditingMealType, setInlineEditingMealType] = useState<'breakfast' | 'lunch' | 'dinner' | null>(null);
+  
+  // Estado para edición inline de alérgenos
+  const [editingAllergensItemId, setEditingAllergensItemId] = useState<number | null>(null);
+  const [editingAllergens, setEditingAllergens] = useState<string[]>([]);
+  
+  // Estado para drag & drop
+  const [draggedItem, setDraggedItem] = useState<{ mealId: number; itemId: number; index: number } | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   const dateStr = date.toISOString().split('T')[0];
   const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
@@ -251,6 +267,307 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
     );
   };
 
+  // Funciones para edición inline de nombre
+  const handleStartInlineEdit = (item: MealItem, mealType: 'breakfast' | 'lunch' | 'dinner') => {
+    setInlineEditingItemId(item.id);
+    setInlineEditingName(item.name);
+    setInlineEditingMealType(mealType);
+    setInlineSuggestions([]);
+    setShowInlineSuggestions(false);
+  };
+
+  const handleInlineNameChange = async (value: string) => {
+    setInlineEditingName(value);
+    console.log('🔍 Buscando sugerencias para:', value);
+    
+    if (value.trim().length >= 2) {
+      const results = await menuService.searchDishes(value.trim());
+      console.log('📋 Resultados encontrados:', results);
+      setInlineSuggestions(results);
+      setShowInlineSuggestions(results.length > 0);
+      setSelectedInlineSuggestionIndex(-1);
+    } else {
+      setInlineSuggestions([]);
+      setShowInlineSuggestions(false);
+    }
+  };
+
+  const selectInlineSuggestion = async (suggestion: { id: number; name: string; allergens: string[] }, itemId: number) => {
+    if (!menu || !inlineEditingMealType) return;
+    
+    const meal = getMealByType(inlineEditingMealType);
+    if (!meal) return;
+
+    setLoading(true);
+    try {
+      // Actualizar con el nombre y alérgenos del plato seleccionado
+      await menuService.updateMealItem(menu.id, meal.id, itemId, {
+        name: suggestion.name,
+        allergens: suggestion.allergens
+      });
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === meal.id 
+            ? {
+                ...m, 
+                items: m.items.map(item => 
+                  item.id === itemId 
+                    ? { ...item, name: suggestion.name, allergens: suggestion.allergens }
+                    : item
+                )
+              }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+      
+      // Incrementar contador de uso
+      menuService.incrementPlateTemplateUsage(suggestion.id);
+    } catch (error) {
+      console.error('Error actualizando plato:', error);
+      alert('Error al actualizar el plato');
+    } finally {
+      setLoading(false);
+      setInlineEditingItemId(null);
+      setInlineSuggestions([]);
+      setShowInlineSuggestions(false);
+      setInlineEditingMealType(null);
+    }
+  };
+
+  const handleInlineKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, itemId: number, currentAllergens: string[]) => {
+    if (showInlineSuggestions && inlineSuggestions.length > 0) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedInlineSuggestionIndex(prev => 
+          prev < inlineSuggestions.length - 1 ? prev + 1 : 0
+        );
+        return;
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedInlineSuggestionIndex(prev => 
+          prev > 0 ? prev - 1 : inlineSuggestions.length - 1
+        );
+        return;
+      } else if (e.key === 'Enter' && selectedInlineSuggestionIndex >= 0) {
+        e.preventDefault();
+        selectInlineSuggestion(inlineSuggestions[selectedInlineSuggestionIndex], itemId);
+        return;
+      }
+    }
+    
+    if (e.key === 'Enter') {
+      handleSaveInlineEdit(inlineEditingMealType!, itemId, currentAllergens);
+    }
+    if (e.key === 'Escape') {
+      handleCancelInlineEdit();
+    }
+  };
+
+  const handleSaveInlineEdit = async (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number, currentAllergens: string[]) => {
+    if (!menu || !inlineEditingName.trim()) {
+      setInlineEditingItemId(null);
+      return;
+    }
+
+    const meal = getMealByType(mealType);
+    if (!meal) {
+      setInlineEditingItemId(null);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await menuService.updateMealItem(menu.id, meal.id, itemId, {
+        name: inlineEditingName.trim(),
+        allergens: currentAllergens
+      });
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === meal.id 
+            ? {
+                ...m, 
+                items: m.items.map(item => 
+                  item.id === itemId 
+                    ? { ...item, name: inlineEditingName.trim() }
+                    : item
+                )
+              }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+    } catch (error) {
+      console.error('Error guardando nombre:', error);
+      alert('Error al guardar el nombre');
+    } finally {
+      setLoading(false);
+      setInlineEditingItemId(null);
+    }
+  };
+
+  const handleCancelInlineEdit = () => {
+    setInlineEditingItemId(null);
+    setInlineEditingName('');
+    setInlineSuggestions([]);
+    setShowInlineSuggestions(false);
+    setInlineEditingMealType(null);
+  };
+
+  // Funciones para edición inline de alérgenos
+  // Normaliza el nombre del alérgeno para comparaciones (minúsculas sin acentos)
+  const normalizeAllergen = (allergen: string) => 
+    allergen.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  const handleStartEditAllergens = (item: MealItem) => {
+    setEditingAllergensItemId(item.id);
+    // Normalizar los alérgenos del item al formato de commonAllergens
+    const normalizedAllergens = item.allergens.map(a => {
+      const found = commonAllergens.find(ca => normalizeAllergen(ca) === normalizeAllergen(a));
+      return found || a;
+    });
+    setEditingAllergens(normalizedAllergens);
+  };
+
+  const handleToggleAllergenInline = (allergen: string) => {
+    setEditingAllergens(prev => {
+      const isSelected = prev.some(a => normalizeAllergen(a) === normalizeAllergen(allergen));
+      if (isSelected) {
+        return prev.filter(a => normalizeAllergen(a) !== normalizeAllergen(allergen));
+      } else {
+        return [...prev, allergen];
+      }
+    });
+  };
+
+  // Verifica si un alérgeno está seleccionado (comparación normalizada)
+  const isAllergenSelected = (allergen: string) => 
+    editingAllergens.some(a => normalizeAllergen(a) === normalizeAllergen(allergen));
+
+  const handleSaveAllergens = async (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number, itemName: string) => {
+    if (!menu) {
+      setEditingAllergensItemId(null);
+      return;
+    }
+
+    const meal = getMealByType(mealType);
+    if (!meal) {
+      setEditingAllergensItemId(null);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await menuService.updateMealItem(menu.id, meal.id, itemId, {
+        name: itemName,
+        allergens: editingAllergens
+      });
+
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === meal.id 
+            ? {
+                ...m, 
+                items: m.items.map(item => 
+                  item.id === itemId 
+                    ? { ...item, allergens: editingAllergens }
+                    : item
+                )
+              }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+    } catch (error) {
+      console.error('Error guardando alérgenos:', error);
+      alert('Error al guardar los alérgenos');
+    } finally {
+      setLoading(false);
+      setEditingAllergensItemId(null);
+    }
+  };
+
+  const handleCancelEditAllergens = () => {
+    setEditingAllergensItemId(null);
+    setEditingAllergens([]);
+  };
+
+  // Funciones para drag & drop
+  const handleDragStart = (e: React.DragEvent, mealId: number, itemId: number, index: number) => {
+    setDraggedItem({ mealId, itemId, index });
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', String(itemId));
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverIndex(index);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverIndex(null);
+  };
+
+  const handleDrop = async (e: React.DragEvent, mealId: number, items: MealItem[]) => {
+    e.preventDefault();
+    
+    if (!menu || !draggedItem || draggedItem.mealId !== mealId || dragOverIndex === null) {
+      setDraggedItem(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const fromIndex = draggedItem.index;
+    const toIndex = dragOverIndex;
+
+    if (fromIndex === toIndex) {
+      setDraggedItem(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    // Reordenar el array de items
+    const newItems = [...items];
+    const [movedItem] = newItems.splice(fromIndex, 1);
+    newItems.splice(toIndex, 0, movedItem);
+
+    // Enviar el nuevo orden al backend
+    setLoading(true);
+    try {
+      await menuService.reorderMealItems(menu.id, mealId, newItems.map(item => item.id));
+      
+      // Actualizar el estado local
+      const updatedMenu = {
+        ...menu,
+        meals: menu.meals.map(m => 
+          m.id === mealId 
+            ? { ...m, items: newItems }
+            : m
+        )
+      };
+      onMenuUpdate(updatedMenu);
+    } catch (error) {
+      console.error('Error reordenando items:', error);
+      alert('Error al reordenar los platos');
+    } finally {
+      setLoading(false);
+    }
+
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
+
   const handleViewDayMenu = () => {
     window.open(`/menu/${dateStr}`, '_blank');
   };
@@ -414,41 +731,182 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
               )}
 
               {/* Lista de platos */}
-              <div className="space-y-2">
+              <ul 
+                className="space-y-2"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => meal && handleDrop(e, meal.id, meal.items)}
+              >
                 {meal && meal.items.length > 0 ? (
-                  meal.items.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between bg-white p-3 rounded-lg border">
-                      <div className="flex-1">
-                        <span className="text-gray-900 font-medium">{item.name}</span>
-                        {item.allergens.length > 0 && (
-                          <div className="flex space-x-1 mt-1">
-                        {item.allergens.map((allergen, idx) => (
-                          <span 
-                            key={idx}
-                            className="flex items-center gap-1 text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full"
-                          >
-                            <AllergenIcon allergen={allergen} className="w-3 h-3" />
-                            {allergen}
-                          </span>
-                        ))}
+                  meal.items.map((item, index) => (
+                    <li
+                      key={item.id}
+                      draggable
+                      onDragStart={(e) => meal && handleDragStart(e, meal.id, item.id, index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDragLeave={handleDragLeave}
+                      onDragEnd={handleDragEnd}
+                      className={`flex items-center gap-2 bg-white p-3 rounded-lg border group cursor-grab active:cursor-grabbing transition-all ${
+                        draggedItem?.itemId === item.id 
+                          ? 'opacity-50 bg-gray-100' 
+                          : dragOverIndex === index && draggedItem?.mealId === meal?.id
+                            ? 'border-t-2 border-blue-500'
+                            : 'hover:bg-gray-50'
+                      }`}
+                    >
+                      {/* Drag handle */}
+                      <div className="text-gray-300 group-hover:text-gray-400 flex-shrink-0">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM14 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM14 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                        </svg>
+                      </div>
+                      
+                      {/* Nombre del plato (editable inline) */}
+                      <div className="flex-1 min-w-0">
+                        {inlineEditingItemId === item.id ? (
+                          <div className="relative">
+                            <input
+                              type="text"
+                              value={inlineEditingName}
+                              onChange={(e) => handleInlineNameChange(e.target.value)}
+                              onKeyDown={(e) => handleInlineKeyDown(e, item.id, item.allergens)}
+                              onBlur={() => {
+                                // Pequeño delay para permitir click en sugerencia
+                                setTimeout(() => {
+                                  if (inlineEditingItemId === item.id && !showInlineSuggestions) {
+                                    handleSaveInlineEdit(mealType, item.id, item.allergens);
+                                  }
+                                }, 150);
+                              }}
+                              className="w-full px-2 py-1 text-sm border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              autoFocus
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                            {/* Sugerencias de autocompletado */}
+                            {showInlineSuggestions && inlineSuggestions.length > 0 && (
+                              <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                                {inlineSuggestions.map((suggestion, idx) => (
+                                  <div
+                                    key={suggestion.id}
+                                    className={`px-3 py-2 cursor-pointer ${
+                                      idx === selectedInlineSuggestionIndex 
+                                        ? 'bg-blue-100' 
+                                        : 'hover:bg-gray-100'
+                                    }`}
+                                    onMouseDown={(e) => {
+                                      e.preventDefault();
+                                      selectInlineSuggestion(suggestion, item.id);
+                                    }}
+                                  >
+                                    <div className="font-medium text-sm text-gray-900">{suggestion.name}</div>
+                                    {suggestion.allergens.length > 0 && (
+                                      <div className="flex flex-wrap gap-1 mt-1">
+                                        {suggestion.allergens.map((allergen, aIdx) => (
+                                          <span key={aIdx} className="flex items-center gap-0.5 text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded">
+                                            <AllergenIcon allergen={allergen} className="w-3 h-3" />
+                                            {allergen}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
+                        ) : (
+                          <span 
+                            className="text-gray-900 font-medium block truncate cursor-text hover:text-blue-700"
+                            onDoubleClick={() => handleStartInlineEdit(item, mealType)}
+                            title="Doble clic para editar"
+                          >
+                            {item.name}
+                          </span>
+                        )}
+                        {inlineEditingItemId !== item.id && (
+                          editingAllergensItemId === item.id ? (
+                            /* Editor inline de alérgenos */
+                            <div className="mt-2 p-2 bg-gray-50 rounded-lg border">
+                              <div className="flex flex-wrap gap-1 mb-2">
+                                {commonAllergens.map((allergen) => (
+                                  <button
+                                    key={allergen}
+                                    type="button"
+                                    onClick={() => handleToggleAllergenInline(allergen)}
+                                    className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full border transition-colors ${
+                                      isAllergenSelected(allergen)
+                                        ? 'bg-red-100 border-red-300 text-red-800'
+                                        : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+                                    }`}
+                                  >
+                                    <AllergenIcon allergen={allergen} className="w-3 h-3" />
+                                    {allergen}
+                                  </button>
+                                ))}
+                              </div>
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleSaveAllergens(mealType, item.id, item.name)}
+                                  disabled={loading}
+                                  className="text-xs bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 disabled:opacity-50"
+                                >
+                                  Guardar
+                                </button>
+                                <button
+                                  onClick={handleCancelEditAllergens}
+                                  className="text-xs text-gray-600 hover:text-gray-800"
+                                >
+                                  Cancelar
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            /* Vista normal de alérgenos */
+                            <div 
+                              className="flex flex-wrap gap-1 mt-1 cursor-pointer group/allergens"
+                              onClick={() => handleStartEditAllergens(item)}
+                              title="Clic para editar alérgenos"
+                            >
+                              {item.allergens.length > 0 ? (
+                                item.allergens.map((allergen, idx) => (
+                                  <span 
+                                    key={idx}
+                                    className="flex items-center gap-1 text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded-full"
+                                  >
+                                    <AllergenIcon allergen={allergen} className="w-3 h-3" />
+                                    {allergen}
+                                  </span>
+                                ))
+                              ) : (
+                                <span className="text-xs text-gray-400 italic opacity-0 group-hover:opacity-100 transition-opacity">
+                                  + Añadir alérgenos
+                                </span>
+                              )}
+                              <span className="text-xs text-blue-500 opacity-0 group-hover/allergens:opacity-100 transition-opacity ml-1">
+                                ✎
+                              </span>
+                            </div>
+                          )
                         )}
                       </div>
+                      
+                      {/* Botón eliminar */}
                       <button
                         onClick={() => handleRemoveItem(mealType, item.id)}
                         disabled={loading}
-                        className="text-red-600 hover:text-red-700 ml-2 disabled:opacity-50"
+                        className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-50 flex-shrink-0"
                       >
-                        ✕
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                       </button>
-                    </div>
+                    </li>
                   ))
                 ) : (
-                  <div className="text-center text-gray-500 py-4">
+                  <li className="text-center text-gray-500 py-4">
                     No hay platos agregados
-                  </div>
+                  </li>
                 )}
-              </div>
+              </ul>
             </div>
           );
         })}
