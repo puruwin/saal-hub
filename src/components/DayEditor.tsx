@@ -419,34 +419,48 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
   };
 
   // Funciones para edición inline de alérgenos
-  // Normaliza el nombre del alérgeno para comparaciones (minúsculas sin acentos)
+  // Normaliza el nombre del alérgeno para comparaciones (minúsculas sin acentos y espacios)
   const normalizeAllergen = (allergen: string) => 
-    allergen.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    allergen.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Quitar acentos
+      .replace(/\s+/g, ''); // Quitar espacios
 
   const handleStartEditAllergens = (item: MealItem) => {
     setEditingAllergensItemId(item.id);
-    // Normalizar los alérgenos del item al formato de commonAllergens
+    // Convertir los alérgenos del item al formato de commonAllergens
     const normalizedAllergens = item.allergens.map(a => {
       const found = commonAllergens.find(ca => normalizeAllergen(ca) === normalizeAllergen(a));
       return found || a;
     });
+    console.log('📝 Editando alérgenos:', { original: item.allergens, normalized: normalizedAllergens });
     setEditingAllergens(normalizedAllergens);
   };
 
   const handleToggleAllergenInline = (allergen: string) => {
     setEditingAllergens(prev => {
-      const isSelected = prev.some(a => normalizeAllergen(a) === normalizeAllergen(allergen));
+      const normalizedAllergen = normalizeAllergen(allergen);
+      const isSelected = prev.some(a => normalizeAllergen(a) === normalizedAllergen);
+      
       if (isSelected) {
-        return prev.filter(a => normalizeAllergen(a) !== normalizeAllergen(allergen));
+        // Quitar el alérgeno
+        const result = prev.filter(a => normalizeAllergen(a) !== normalizedAllergen);
+        console.log('➖ Quitando alérgeno:', allergen, '→', result);
+        return result;
       } else {
-        return [...prev, allergen];
+        // Añadir el alérgeno
+        const result = [...prev, allergen];
+        console.log('➕ Añadiendo alérgeno:', allergen, '→', result);
+        return result;
       }
     });
   };
 
   // Verifica si un alérgeno está seleccionado (comparación normalizada)
-  const isAllergenSelected = (allergen: string) => 
-    editingAllergens.some(a => normalizeAllergen(a) === normalizeAllergen(allergen));
+  const isAllergenSelected = (allergen: string) => {
+    const result = editingAllergens.some(a => normalizeAllergen(a) === normalizeAllergen(allergen));
+    return result;
+  };
 
   const handleSaveAllergens = async (mealType: 'breakfast' | 'lunch' | 'dinner', itemId: number, itemName: string) => {
     if (!menu) {
@@ -462,33 +476,32 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
 
     setLoading(true);
     try {
+      console.log('💾 Guardando alérgenos:', {
+        menuId: menu.id,
+        mealId: meal.id,
+        itemId: itemId,
+        name: itemName,
+        allergens: editingAllergens
+      });
+
       await menuService.updateMealItem(menu.id, meal.id, itemId, {
         name: itemName,
         allergens: editingAllergens
       });
 
-      const updatedMenu = {
-        ...menu,
-        meals: menu.meals.map(m => 
-          m.id === meal.id 
-            ? {
-                ...m, 
-                items: m.items.map(item => 
-                  item.id === itemId 
-                    ? { ...item, allergens: editingAllergens }
-                    : item
-                )
-              }
-            : m
-        )
-      };
-      onMenuUpdate(updatedMenu);
+      // Recargar el menú completo desde el servidor para asegurar sincronización
+      const refreshedMenu = await menuService.getMenuByDate(dateStr);
+      if (refreshedMenu) {
+        console.log('✅ Menú recargado desde el servidor');
+        onMenuUpdate(refreshedMenu);
+      }
     } catch (error) {
-      console.error('Error guardando alérgenos:', error);
+      console.error('❌ Error guardando alérgenos:', error);
       alert('Error al guardar los alérgenos');
     } finally {
       setLoading(false);
       setEditingAllergensItemId(null);
+      setEditingAllergens([]);
     }
   };
 
@@ -540,20 +553,22 @@ export default function DayEditor({ menu, date, onMenuUpdate, onMenuCreate }: Da
     // Enviar el nuevo orden al backend
     setLoading(true);
     try {
+      console.log('🔄 Reordenando platos:', {
+        from: fromIndex,
+        to: toIndex,
+        newOrder: newItems.map(item => item.name)
+      });
+
       await menuService.reorderMealItems(menu.id, mealId, newItems.map(item => item.id));
       
-      // Actualizar el estado local
-      const updatedMenu = {
-        ...menu,
-        meals: menu.meals.map(m => 
-          m.id === mealId 
-            ? { ...m, items: newItems }
-            : m
-        )
-      };
-      onMenuUpdate(updatedMenu);
+      // Recargar el menú completo desde el servidor para asegurar sincronización
+      const refreshedMenu = await menuService.getMenuByDate(dateStr);
+      if (refreshedMenu) {
+        console.log('✅ Menú recargado con nuevo orden');
+        onMenuUpdate(refreshedMenu);
+      }
     } catch (error) {
-      console.error('Error reordenando items:', error);
+      console.error('❌ Error reordenando items:', error);
       alert('Error al reordenar los platos');
     } finally {
       setLoading(false);

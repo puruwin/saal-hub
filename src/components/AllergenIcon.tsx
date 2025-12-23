@@ -23,6 +23,7 @@ const allergenIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
   'lacteos': LacteosIcon,
   'huevos': HuevosIcon,
   'frutos_cascara': FrutosCascaraIcon,
+  'frutos_secos': FrutosCascaraIcon, // Alias para "Frutos secos"
   'soja': SojaIcon,
   'pescado': PescadoIcon,
   'mariscos': CrustaceosIcon,
@@ -36,11 +37,22 @@ const allergenIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
   'sulfitos': SulfitosIcon,
 };
 
+// Normaliza el nombre del alérgeno para encontrar el icono correcto
+const normalizeAllergenKey = (allergen: string): string => {
+  return allergen
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Quitar acentos
+    .replace(/\s+/g, '_'); // Reemplazar espacios con guiones bajos
+};
+
 export default function AllergenIcon({ allergen, className = "w-4 h-4" }: AllergenIconProps) {
-  const IconComponent = allergenIcons[allergen];
+  const normalizedKey = normalizeAllergenKey(allergen);
+  const IconComponent = allergenIcons[normalizedKey];
   
   if (!IconComponent) {
     // Fallback para alérgenos no encontrados
+    console.warn(`Icono no encontrado para alérgeno: "${allergen}" (normalizado: "${normalizedKey}")`);
     return <span className="text-xs">⚠️</span>;
   }
   
