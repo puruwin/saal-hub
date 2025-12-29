@@ -330,12 +330,16 @@ export default function MenuView() {
              {/* Contenedor de imagen y texto superpuestos */}
              <div className="relative">
                {/* Imagen del grupo */}
-               <div className="mt-32">
+               <div className="mt-32 relative">
                  <img 
                    src={ske48Image} 
                    alt="SKE48" 
                    className="w-full h-auto"
                  />
+                 {/* Logo SKE48 superpuesto */}
+                 <div className="absolute bottom-24 right-24 ske48-logo">
+                   ske48
+                 </div>
                </div>
                
                {/* Texto en arco (superpuesto) */}

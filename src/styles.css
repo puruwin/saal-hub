@@ -9,6 +9,15 @@
   font-display: swap;
 }
 
+/* Fuente Rastanty Cortez para el logo SKE48 */
+@font-face {
+  font-family: 'Rastanty Cortez';
+  src: url('/src/assets/rastanty-cortez.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Aplicar Roboto a todo el body */
 body {
   font-family: 'Roboto', sans-serif;
@@ -25,6 +34,15 @@ body {
 .graduation-title text,
 .graduation-title {
   fill: currentColor;
+}
+
+/* Estilo para el logo SKE48 */
+.ske48-logo {
+  font-family: 'Rastanty Cortez', cursive;
+  color: #003857;
+  font-size: 8rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
 }
 
 /* Estilos personalizados para el kiosco de menú */
