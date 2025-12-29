@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AllergenIcon from "../components/AllergenIcon";
 import { menuService } from "../services/menuService";
+import { settingsService } from "../services/settingsService";
 import breakfastImage from "../assets/breakfast.jpg";
 import lunchImage from "../assets/lunch.jpg";
 import dinnerImage from "../assets/dinner.jpg";
+import marcoRosas from "../assets/marco_rosas.svg";
+import ske48Image from "../assets/ske48.png";
 
 interface MealItem {
   id: number;
@@ -36,11 +39,27 @@ export default function MenuView() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [schoolStartDate, setSchoolStartDate] = useState<Date | null>(null);
 
   // Función para obtener la fecha a mostrar
   const getDisplayDate = () => {
     // Si hay fecha en el parámetro, usarla; sino usar hoy
     return paramDate || new Date().toISOString().split('T')[0];
+  };
+
+  // Cargar configuración del backend (fecha de inicio escolar)
+  const loadSettings = async () => {
+    try {
+      const startDate = await settingsService.getSchoolStartDate();
+      if (startDate) {
+        setSchoolStartDate(startDate);
+        console.log('📅 Fecha de inicio escolar cargada:', startDate);
+      } else {
+        console.warn('⚠️ No se encontró fecha de inicio escolar en la configuración');
+      }
+    } catch (err) {
+      console.error('Error cargando configuración:', err);
+    }
   };
 
   // Cargar menú de la fecha correspondiente
@@ -71,6 +90,11 @@ export default function MenuView() {
       setIsLoading(false);
     }
   };
+
+  // Cargar configuración al montar el componente
+  useEffect(() => {
+    loadSettings();
+  }, []);
 
   // Cargar menú al montar el componente o cuando cambie la fecha
   useEffect(() => {
@@ -171,6 +195,63 @@ export default function MenuView() {
     return menu.meals.filter(meal => meal.type !== currentMealType);
   };
 
+  // Verificar si la fecha del menú es fin de semana
+  const isWeekend = (): boolean => {
+    if (!menu) return false;
+    const date = new Date(menu.date);
+    const dayOfWeek = date.getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6; // Domingo o Sábado
+  };
+
+  // Calcular el número de semana escolar basado en una fecha de inicio
+  // Asumiendo que la semana escolar comienza un lunes específico
+  const getSchoolWeek = (date: Date, schoolStartDate: Date): number => {
+    const timeDiff = date.getTime() - schoolStartDate.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    return Math.floor(daysDiff / 7) + 1;
+  };
+
+  // Verificar si es el último viernes de escuela (viernes semana 8) durante la comida
+  const isLastFridayLunch = (): boolean => {
+    if (!menu) return false;
+    
+    // Si no tenemos la fecha de inicio escolar, no podemos calcular la semana
+    if (!schoolStartDate) {
+      console.warn('⚠️ No se puede verificar semana 8: falta schoolStartDate');
+      return false;
+    }
+    
+    const date = new Date(menu.date);
+    const dayOfWeek = date.getDay();
+    
+    // Verificar que sea viernes (5)
+    if (dayOfWeek !== 5) return false;
+    
+    // Verificar que sea hora de comida
+    const currentMealType = getCurrentMealType();
+    if (currentMealType !== 'lunch') return false;
+    
+    // Calcular la semana escolar actual usando la fecha del backend
+    const weekNumber = getSchoolWeek(date, schoolStartDate);
+    
+    console.log('📊 Semana escolar actual:', weekNumber, 'para fecha:', menu.date);
+    console.log('📅 schoolStartDate:', schoolStartDate);
+    console.log('🔍 Es viernes?', dayOfWeek === 5, '| Es lunch?', currentMealType === 'lunch');
+    
+    // Verificar si es la semana 9 (última semana, que es la 8 contando desde 0)
+    // El bulk import crea: semana 0 (JUE-DOM) + semanas 1-8 (completas) = 9 semanas totales
+    // El viernes de graduación es el viernes de la semana 8 (última semana completa)
+    return weekNumber === 9;
+  };
+
+  // Obtener comidas para la vista de fin de semana
+  const getWeekendMeals = (): { breakfast: Meal | null; lunch: Meal | null } => {
+    if (!menu) return { breakfast: null, lunch: null };
+    const breakfast = menu.meals.find(meal => meal.type === 'breakfast') || null;
+    const lunch = menu.meals.find(meal => meal.type === 'lunch') || null;
+    return { breakfast, lunch };
+  };
+
   // Obtener la imagen según el tipo de comida
   const getMealImage = (mealType: 'breakfast' | 'lunch' | 'dinner'): string => {
     const images = {
@@ -219,10 +300,136 @@ export default function MenuView() {
   const currentMeal = getCurrentMeal();
   const otherMeals = getOtherMeals();
   const currentMealType = getCurrentMealType();
+  const weekendMeals = getWeekendMeals();
 
   return (
     <div id="wrapper" className="h-screen w-screen bg-[#fffde3] font-['Roboto',sans-serif]">
-      {menu && currentMeal ? (
+        {menu && isLastFridayLunch() && currentMeal ? (
+         <div className="h-full flex flex-col bg-[#daf2ff] relative overflow-hidden">
+           {/* Marco de rosas - Esquina superior izquierda */}
+           <img 
+             src={marcoRosas} 
+             alt="" 
+             className="absolute top-0 left-0 w-80 h-80 pointer-events-none"
+             style={{ zIndex: 10 }}
+           />
+           
+           {/* Marco de rosas - Esquina inferior derecha (rotado 180°) */}
+           <img 
+             src={marcoRosas} 
+             alt="" 
+             className="absolute bottom-0 right-0 w-80 h-80 pointer-events-none"
+             style={{ transform: 'rotate(180deg)', zIndex: 10 }}
+           />
+           
+           <div 
+             id="header" 
+             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+             style={{ zIndex: 20, width: '85vw', maxWidth: '1800px' }}
+           >
+             {/* Contenedor de imagen y texto superpuestos */}
+             <div className="relative">
+               {/* Imagen del grupo */}
+               <div className="mt-32">
+                 <img 
+                   src={ske48Image} 
+                   alt="SKE48" 
+                   className="w-full h-auto"
+                 />
+               </div>
+               
+               {/* Texto en arco (superpuesto) */}
+               <div className="absolute top-[-120px] left-0 w-full">
+                 <svg viewBox="0 0 1600 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                   <defs>
+                     <path 
+                       id="arc-path" 
+                       d="M 50,280 Q 800,80 1550,280"
+                       fill="transparent"
+                     />
+                   </defs>
+                   <text 
+                     fontSize="68" 
+                     fill="#003857" 
+                     textAnchor="middle"
+                     style={{ 
+                       fontFamily: 'Rowena, serif',
+                       fontWeight: 900,
+                       letterSpacing: '0.05em'
+                     }}
+                   >
+                     <textPath href="#arc-path" startOffset="50%">
+                       MENÚ ESPECIAL: VIERNES DE GRADUACIÓN
+                     </textPath>
+                   </text>
+                 </svg>
+               </div>
+             </div>
+           </div>
+         </div>
+      ) : menu && isWeekend() && weekendMeals.breakfast ? (
+        // Vista de fin de semana - dos columnas sin imagen
+        <div className="h-full flex flex-col">
+          {/* Header compartido */}
+          <div id="header" className="w-full flex justify-between items-start px-16 pt-8 pb-4">
+            <h1 className="text-5xl tracking-[0.20em] font-extrabold font-['Roboto',sans-serif]">
+              FIN DE SEMANA
+            </h1>
+            <div className="flex flex-col items-end">
+              <p className="text-2xl font-['Roboto',sans-serif]">{date.toUpperCase()}</p>
+              <p className="text-4xl tracking-[0.20em] font-extrabold font-['Roboto',sans-serif] -mr-[0.20em]">{time}</p>
+            </div>
+          </div>
+          
+          {/* Contenido en dos columnas */}
+          <div className="flex-1 grid grid-cols-2 gap-8 px-16 pb-8">
+            {/* Columna izquierda: Desayuno */}
+            <div className="flex flex-col justify-around border-4 box-border border-gray-800 py-4 px-6">
+              <div>
+                <h2 className="text-4xl font-extrabold tracking-[0.10em] mb-4 font-['Roboto',sans-serif]">
+                  DESAYUNO
+                </h2>
+              </div>
+              {weekendMeals.breakfast.items.map((item) => (
+                <div key={item.id}>
+                  <p className="text-2xl font-extrabold tracking-[0.10em] font-['Roboto',sans-serif]">
+                    {item.name.toUpperCase()}
+                  </p>
+                  <div className="flex flex-row space-x-4 min-h-[2rem]">
+                    {item.allergens.length > 0 && item.allergens.map((allergen) => (
+                      <AllergenIcon key={allergen} allergen={allergen} className="w-8 h-8" />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Columna derecha: En Nevera */}
+            {weekendMeals.lunch && (
+              <div className="flex flex-col justify-around border-4 box-border border-gray-800 py-4 px-6">
+                <div>
+                  <h2 className="text-4xl font-extrabold tracking-[0.10em] mb-4 font-['Roboto',sans-serif]">
+                    EN NEVERA
+                  </h2>
+                </div>
+                {weekendMeals.lunch.items.map((item) => (
+                  <div key={item.id}>
+                    <p className="text-2xl font-extrabold tracking-[0.10em] font-['Roboto',sans-serif]">
+                      {item.name.toUpperCase()}
+                    </p>
+                    <div className="flex flex-row space-x-4 min-h-[2rem]">
+                      {item.allergens.length > 0 && item.allergens.map((allergen) => (
+                        <AllergenIcon key={allergen} allergen={allergen} className="w-8 h-8" />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ) : menu && currentMeal ? (
+        // Vista normal entre semana
         <div className="h-full grid grid-cols-2">
           <div className="h-full pl-16 pt-8 flex flex-col">
             <div id="header" className="w-full flex justify-between items-start mb-8">

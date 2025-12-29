@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+/* Fuente personalizada para el viernes de graduación */
+@font-face {
+  font-family: 'Rowena';
+  src: url('/src/assets/Rowena-Heavy.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Aplicar Roboto a todo el body */
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+/* Estilo especial para el título del viernes de graduación */
+.graduation-title {
+  font-family: 'Rowena', serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+/* Asegurar que el SVG mantenga el color del texto */
+.graduation-title text,
+.graduation-title {
+  fill: currentColor;
 }
 
 /* Estilos personalizados para el kiosco de menú */

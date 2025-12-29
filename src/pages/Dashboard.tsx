@@ -178,7 +178,7 @@ export default function Dashboard() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <h1 className="text-xl font-semibold text-gray-900">
-                Menu Hub Dashboard
+                SKE Kitchen Hub
               </h1>
             </div>
             <div className="flex items-center space-x-4">
@@ -196,9 +196,6 @@ export default function Dashboard() {
               >
                 Ver Menú Público
               </a>
-              <span className="text-gray-700">
-                Bienvenido, {user.username}
-              </span>
               <button
                 onClick={handleLogout}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-medium"
@@ -216,28 +213,6 @@ export default function Dashboard() {
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center space-x-4">
               <h2 className="text-2xl font-bold text-gray-900">Gestión de Menús</h2>
-              <div className="flex bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('weekly')}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    viewMode === 'weekly'
-                      ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  Vista Semanal
-                </button>
-                <button
-                  onClick={() => setViewMode('daily')}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    viewMode === 'daily'
-                      ? 'bg-white text-gray-900 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  Editor Diario
-                </button>
-              </div>
             </div>
 
             {viewMode === 'daily' && (

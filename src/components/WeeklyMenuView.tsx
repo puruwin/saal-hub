@@ -381,7 +381,7 @@ export default function WeeklyMenuView({ menus: initialMenus, onMenuUpdate }: We
                     
                     return (
                       <td key={mealType} className="p-4">
-                        <div className={`rounded-lg border-2 ${isWeekend ? 'border-solid border-blue-300' : 'border-dashed'} p-3 min-h-[120px] ${mealTypeColors[mealType]}`}>
+                        <div className={`rounded-lg border-2 border-solid p-3 min-h-[120px] ${mealTypeColors[mealType]}`}>
                           {meal && meal.items.length > 0 ? (
                             <div className="space-y-2">
                               {meal.items.map((item) => (
