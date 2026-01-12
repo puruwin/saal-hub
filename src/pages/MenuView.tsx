@@ -212,14 +212,14 @@ export default function MenuView() {
   };
 
   // Verificar si es el último viernes de escuela (viernes semana 8) durante la comida
-  // ⚠️ FORZADO: Siempre retorna true para mostrar la vista de graduación
+  // ⚠️ DESACTIVADO: Vista especial de graduación deshabilitada
   const isLastFridayLunch = (): boolean => {
+    // 🚫 VISTA DE GRADUACIÓN DESACTIVADA - Nunca se muestra
+    return false;
+    
+    /* CÓDIGO ORIGINAL COMENTADO - Para reactivar, descomentar el código y eliminar el "return false" de arriba
+    
     if (!menu) return false;
-    
-    // 🎓 VISTA DE GRADUACIÓN FORZADA - Siempre se muestra
-    return true;
-    
-    /* CÓDIGO ORIGINAL COMENTADO - Descomentar para restaurar la lógica de fechas
     
     // Si no tenemos la fecha de inicio escolar, no podemos calcular la semana
     if (!schoolStartDate) {
