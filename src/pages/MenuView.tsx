@@ -7,7 +7,7 @@ import breakfastImage from "../assets/breakfast.jpg";
 import lunchImage from "../assets/lunch.jpg";
 import dinnerImage from "../assets/dinner.jpg";
 import marcoRosas from "../assets/marco_rosas.svg";
-import ske48Image from "../assets/ske48.png";
+import ske50Image from "../assets/ske50.png";
 
 interface MealItem {
   id: number;
@@ -41,6 +41,12 @@ export default function MenuView() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [schoolStartDate, setSchoolStartDate] = useState<Date | null>(null);
 
+  const parseYmdDateLocal = (dateString: string): Date => {
+    const [y, m, d] = dateString.split("-").map((v) => Number(v));
+    if (!y || !m || !d) return new Date(dateString);
+    return new Date(y, m - 1, d);
+  };
+
   // Función para obtener la fecha a mostrar
   const getDisplayDate = () => {
     // Si hay fecha en el parámetro, usarla; sino usar hoy
@@ -71,7 +77,7 @@ export default function MenuView() {
       const displayDate = getDisplayDate();
 
       // Si es domingo, buscar el menú del sábado
-      const selectedDate = new Date(displayDate);
+      const selectedDate = parseYmdDateLocal(displayDate);
       let searchDate = displayDate;
 
       if (selectedDate.getDay() === 0) {
@@ -142,7 +148,7 @@ export default function MenuView() {
 
   // Formatear la fecha del menú para mostrar en pantalla
   const formatMenuDate = (dateString: string) => {
-    const date = new Date(dateString);
+    const date = parseYmdDateLocal(dateString);
     const dayOfWeek = date.getDay();
 
     // Si es sábado o domingo, mostrar como "Fin de semana"
@@ -198,7 +204,7 @@ export default function MenuView() {
   // Verificar si la fecha del menú es fin de semana
   const isWeekend = (): boolean => {
     if (!menu) return false;
-    const date = new Date(menu.date);
+    const date = parseYmdDateLocal(menu.date);
     const dayOfWeek = date.getDay();
     return dayOfWeek === 0 || dayOfWeek === 6; // Domingo o Sábado
   };
@@ -212,44 +218,40 @@ export default function MenuView() {
   };
 
   // Verificar si es el último viernes de escuela (viernes semana 8) durante la comida
-  // ⚠️ DESACTIVADO: Vista especial de graduación deshabilitada
   const isLastFridayLunch = (): boolean => {
-    // 🚫 VISTA DE GRADUACIÓN DESACTIVADA - Nunca se muestra
-    return false;
-    
-    /* CÓDIGO ORIGINAL COMENTADO - Para reactivar, descomentar el código y eliminar el "return false" de arriba
-    
+    const DEBUG_FORCE_GRADUATION = true; // false para producción
+    if (DEBUG_FORCE_GRADUATION && menu) return true;
+
     if (!menu) return false;
-    
+
     // Si no tenemos la fecha de inicio escolar, no podemos calcular la semana
     if (!schoolStartDate) {
       console.warn('⚠️ No se puede verificar semana 8: falta schoolStartDate');
       return false;
     }
-    
-    const date = new Date(menu.date);
+
+    const date = parseYmdDateLocal(menu.date);
     const dayOfWeek = date.getDay();
-    
+
     // Verificar que sea viernes (5)
     if (dayOfWeek !== 5) return false;
-    
+
     // Verificar que sea hora de comida
     const currentMealType = getCurrentMealType();
     if (currentMealType !== 'lunch') return false;
-    
+
     // Calcular la semana escolar actual usando la fecha del backend
-    const weekNumber = getSchoolWeek(date, schoolStartDate);
-    
-    console.log('📊 Semana escolar actual:', weekNumber, 'para fecha:', menu.date);
-    console.log('📅 schoolStartDate:', schoolStartDate);
-    console.log('🔍 Es viernes?', dayOfWeek === 5, '| Es lunch?', currentMealType === 'lunch');
-    
+    const schoolStartLocal = new Date(
+      schoolStartDate.getFullYear(),
+      schoolStartDate.getMonth(),
+      schoolStartDate.getDate()
+    );
+    const weekNumber = getSchoolWeek(date, schoolStartLocal);
+
     // Verificar si es la semana 9 (última semana, que es la 8 contando desde 0)
     // El bulk import crea: semana 0 (JUE-DOM) + semanas 1-8 (completas) = 9 semanas totales
     // El viernes de graduación es el viernes de la semana 8 (última semana completa)
     return weekNumber === 9;
-    
-    */
   };
 
   // Obtener comidas para la vista de fin de semana
@@ -313,7 +315,7 @@ export default function MenuView() {
   return (
     <div id="wrapper" className="h-screen w-screen bg-[#fffde3] font-['Roboto',sans-serif]">
         {menu && isLastFridayLunch() && currentMeal ? (
-         <div className="h-full flex flex-col bg-[#daf2ff] relative overflow-hidden">
+         <div className="h-full flex flex-col bg-[#FEE8E9] relative overflow-hidden">
            {/* Marco de rosas - Esquina superior izquierda */}
            <img 
              src={marcoRosas} 
@@ -340,13 +342,13 @@ export default function MenuView() {
                {/* Imagen del grupo */}
                <div className="mt-32 relative">
                  <img 
-                   src={ske48Image} 
-                   alt="SKE48" 
+                   src={ske50Image} 
+                   alt="SKE50" 
                    className="w-full h-auto"
                  />
-                 {/* Logo SKE48 superpuesto */}
-                 <div className="absolute bottom-24 right-24 ske48-logo">
-                   ske48
+                 {/* Logo SKE50 superpuesto */}
+                 <div className="absolute bottom-24 right-24 ske-logo">
+                   ske50
                  </div>
                </div>
                
@@ -362,7 +364,7 @@ export default function MenuView() {
                    </defs>
                    <text 
                      fontSize="68" 
-                     fill="#003857" 
+                     fill="#6F4949" 
                      textAnchor="middle"
                      style={{ 
                        fontFamily: 'Rowena, serif',
