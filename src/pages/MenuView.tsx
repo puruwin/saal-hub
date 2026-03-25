@@ -219,7 +219,7 @@ export default function MenuView() {
 
   // Verificar si es el último viernes de escuela (viernes semana 8) durante la comida
   const isLastFridayLunch = (): boolean => {
-    const DEBUG_FORCE_GRADUATION = true; // false para producción
+    const DEBUG_FORCE_GRADUATION = false; // false para producción
     if (DEBUG_FORCE_GRADUATION && menu) return true;
 
     if (!menu) return false;
